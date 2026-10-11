@@ -1,0 +1,13 @@
+# Dependências do Node.js
+node_modules/
+
+# Arquivos de configuração e credenciais
+.env
+.env.*
+!.env.example
+
+# Arquivos locais do sistema
+.DS_Store
+
+# Configurações específicas do editor
+.vscode/
