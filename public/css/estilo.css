@@ -3,8 +3,9 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Barlow', 'Segoe UI', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: black;
+  font-family: 'Barlow', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #FFFFFF;
+  color: #3F1768;
 }
 
 :root {
@@ -34,7 +35,24 @@ body {
 
 .header a {
   text-decoration: none;
-  color: #e3b062;
+  color: #3F1768;
+}
+
+.header .botao-cadastro {
+  display: inline-block;
+  background-color: #820AD1;
+  color: #FFFFFF;
+  padding: 12px 24px;
+  border-radius: 30px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+.header .botao-cadastro:hover {
+  background-color: #6908A8;
+  color: #FFFFFF;
+  transform: scale(1.03);
 }
 
 .agora {
@@ -42,36 +60,60 @@ body {
 }
 
 .navbar {
-  width: 300px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  list-style: none;
-  color: #e3b062;
-}
-
-.titulo {
-  color: #32b9cd;
-  width: fit-content;
-  font-weight: 500;
-}
-
-.header h1 {
+  gap: 24px;
+  width: auto;
   margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.navbar a {
+  white-space: nowrap;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.logo img {
+  display: block;
+  width: 140px;
+  height: auto;
+}
+
+.header {
+  background-color: #FFFFFF;
+  border-bottom: none;
+}
+
+.header a {
+  color: #3F1768;
+  text-decoration: none;
+}
+
+.navbar a:hover {
+  color: #820AD1;
 }
 
 /* BANNER */
 
 .banner {
   height: var(--tamanho-banner);
-  color: white;
-  background-image: url('../assets/imgs/bg-jelly-fish-para-home.png');
-  background-size: cover;
+  background-color: #FFFFFF;
+  background-image: none;
+  color: #3F1768;
 }
 
 .banner .container {
-  justify-content: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   align-items: center;
+  gap: 40px;
   height: 100%;
 }
 
@@ -80,10 +122,107 @@ body {
   margin: 0;
   padding: 0;
   font-size: 36px;
+  color: #3F1768;
+}
+
+.banner h4 {
+  margin: 0;
+  color: #D6298E;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+.banner .container .descricao-banner {
+  font-size: 20px;
+  font-weight: 400;
+  color: #666173;
+  line-height: 1.6;
+  width: 100%;
+  max-width: 480px;
+  margin: 0;
+}
+
+.banner .container .titulo-banner {
+  margin: 0;
+  color: #171224;
+  font-size: 64px;
+  font-weight: 800;
+  line-height: 1.1;
+  width: 100%;
+  max-width: 500px;
+}
+
+.banner .titulo-banner span {
+  color: #820AD1;
 }
 
 .banner .container span {
+  color: #820AD1;
   font-weight: 800;
+}
+
+.banner-textos {
+  width: 48%;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.botao1-banner {
+  display: inline-block;
+  align-self: flex-start;
+  padding: 16px 28px;
+  background-color: #820AD1;
+  color: #FFFFFF;
+  border-radius: 30px;
+  font-size: 18px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+
+.botao1-banner:hover {
+  background-color: #6908A8;
+  transform: scale(1.03);
+}
+
+.banner-botoes {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+
+}
+
+.botao2-banner {
+  display: inline-block;
+  padding: 16px 28px;
+  border: 2px solid #820AD1;
+  border-radius: 30px;
+  background-color: white;
+  color: #820AD1;
+  font-size: 18px;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background-color 0.2s;
+}
+
+.botao2-banner:hover {
+  background-color: #F5EAFE;
+}
+
+.banner-imagem {
+  width: 48%;
+  height: 500px;
+  object-fit: cover;
+  border-radius: 30px;
+  display: block;
+  /*sombreamento da imagem. 
+  sombra pra direita / sombra pra baixo / desfoque / aumento de sombra
+  */
+  box-shadow: 20px 20px 100px 30px rgba(130, 10, 209, 0.16);
 }
 
 /* MISSÃO VISÃO VALORES */
@@ -237,7 +376,7 @@ body {
 
 /* FORMULARIO */
 
-.alerta_erro{
+.alerta_erro {
   display: flex;
   justify-content: flex-end;
 }
@@ -254,7 +393,7 @@ body {
   margin-right: 10%;
 }
 
-.card_erro #mensagem_erro{
+.card_erro #mensagem_erro {
   font-weight: 500;
   font-size: 20px;
 }
@@ -310,7 +449,7 @@ input {
 
 .simulador .container {
   flex-direction: column;
-  overflow: scroll; 
+  overflow: scroll;
   height: var(--tamanho-simulador);
 }
 
@@ -354,9 +493,23 @@ input {
 }
 
 @keyframes bell {
-  0%   {transform: rotate(25deg)}
-  25%  {transform: rotate(-25deg)}
-  50%  {transform: rotate(25deg)}
-  75%  {transform: rotate(-25deg)}
-  100% {transform: rotate(25deg)}
+  0% {
+    transform: rotate(25deg)
+  }
+
+  25% {
+    transform: rotate(-25deg)
+  }
+
+  50% {
+    transform: rotate(25deg)
+  }
+
+  75% {
+    transform: rotate(-25deg)
+  }
+
+  100% {
+    transform: rotate(25deg)
+  }
 }
