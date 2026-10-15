@@ -1,105 +1,61 @@
-<img src="https://user-images.githubusercontent.com/46379117/192358781-9ca879e4-e55e-4d0d-b876-f9a4a2ed9ae8.png" width="600px">
-
-_Web Data Visualization = Visualização de Dados na Web_
-
-_Implementação de Referência para o seu Projeto de Primeiro Semestre_
-
-<hr>
-
-# Como usar
-
-1. Clone este repositório em sua máquina.
+<p align="center">
+  <img src="./public/assets/imgs/logo.png" alt="Logo do Triply" width="220">
+</p>
 
 
-1. Crie, no Banco de Dados, as tabelas necessárias para o funcionamento deste projeto.
-- Siga as instruções no arquivo **/src/database/script-tabelas.sql**
+### Sua viagem, do seu jeito.
 
+O Triply é meu projeto individual da disciplina de Pesquisa e Inovação, desenvolvido no primeiro semestre do curso de Análise e Desenvolvimento de Sistemas da São Paulo Tech School.
 
-3. Acesse o arquivo **app.js** e parametrize o ambiente.
-- Se você estiver utilizando o Ambiente de Produção (remoto), comente a linha 2 e deixe habilitada a linha 1 onde está o valor **var ambiente_processo = 'producao';**
-- Se você estiver utilizando o Ambiente de Desenvolvimento (local), comente a linha 1 e deixe habilitada a linha 2 onde está o valor **var ambiente_processo = 'desenvolvimento';**
+Estou utilizando a Web Data Viz, disponibilizada pela faculdade, como base para a aplicação. A partir dessa estrutura, estou adaptando as páginas e desenvolvendo as funcionalidades do Triply com os conhecimentos adquiridos nas aulas.
 
-4. Adicione as credenciais de Banco de Dados no arquivo **.env** ou em **.env.dev**, seguindo as instruções neste.
+## Sobre o projeto
 
-5. Acesse este repositório no seu terminal (GitBash ou VSCode) e execute os comandos abaixo:
+A proposta do Triply é ajudar o usuário a organizar suas viagens, reunindo roteiro, orçamento e preparativos em um só lugar.
 
-```
-npm i
-``` 
-_O comando acima irá instalar as bibliotecas necessárias para o funcionamento do projeto. As bibliotecas a serem instaladas estão listadas no arquivo **package.json** então é muito importante que este não seja alterado. Será criada uma nova pasta/diretório chamado **node_modules** quando o comando for finalizado, que é onde as bibliotecas estão localizadas. Não altere a pasta/diretório._
+Escolhi esse tema porque estou planejando uma viagem para reencontrar minha família depois de oito meses. Para mim, viajar também significa realizar sonhos e estar perto de pessoas importantes. Quis trazer esse significado para o projeto.
 
-```
-npm start
-``` 
+## Funcionalidades planejadas
 
-_O comando acima irá iniciar seu projeto e efetuar os comandos de acordo com a sua parametrização feita nos passos anteriores._
+- Cadastro e login de usuários.
+- Cadastro e consulta de viagens.
+- Organização do roteiro.
+- Registro de despesas e acompanhamento do orçamento.
+- Checklist dos preparativos da viagem.
+- Quiz para sugerir destinos conforme as preferências do usuário.
+- Dashboard com indicadores do planejamento.
 
-6. Para "ver" seu projeto funcionando, acesse em seu navegador o caminho **informado no terminal**.
+O Triply será voltado à organização da viagem. Não realizará reservas ou compras de passagens e hospedagens.
 
-7. Caso queira parar a execução, tecle **CTRL+C** no terminal em que o projeto está rodando.
+## Tecnologias
 
-## Adicionar novo recurso ao projeto
+- HTML
+- CSS
+- JavaScript
+- Node.js
+- Express
+- MySQL
+- Chart.js para os gráficos planejados
+- Git e GitHub
 
-**"Recurso? O que é?"** Enquanto no Banco de Dados chamamos as tabelas de "entidades", quando tratamos de desenvolvimento WEB usamos a palavra "recurso" para se referir a algo que podemos criar, ler, atualizar ou deletar [1]. Estas ações são conhecidas como CRUD: Create, Read, Update e Delete. Para acessar cada ação, usamos os métodos HTTP: POST, GET, PUT e DELETE [2]. (Há outros verbos, porém com estes já conseguimos efetuar CRUDs). 
+## Andamento
 
-**Tabela para ajudar a fazer a associação**
+🚧 Projeto em desenvolvimento.
 
-<table>
-  <tr>
-    <th>C.R.U.D</th>
-    <th>Ação</th>
-    <th>Tradução</th>
-    <th>Verbo HTTP *</th>
-    <th>Comando BD</th>
-  </tr>
-  <tr>
-    <td>C</td>
-    <td>Create</td>
-    <td>Criar</td>
-    <td>POST</td>
-    <td>INSERT</td>
-  </tr>
-  <tr>
-    <td>R</td>
-    <td>Read</td>
-    <td>Ler</td>
-    <td>GET</td>
-    <td>SELECT</td>
-  </tr>
-  <tr>
-    <td>U</td>
-    <td>Update</td>
-    <td>Atualizar</td>
-    <td>PUT</td>
-    <td>UPDATE</td>
-  </tr>
-  <tr>
-    <td>D</td>
-    <td>Delete</td>
-    <td>Deletar</td>
-    <td>DELETE</td>
-    <td>DELETE</td>
-  </tr>
-</table>
+A página inicial está sendo adaptada à identidade visual do Triply. O cabeçalho e o banner já receberam ajustes na logo, nos textos, nas imagens e nos botões.
 
-_* Você verá o verbo HTTP sendo apontado nos arquivos em /routes_
+As demais páginas e funcionalidades serão desenvolvidas por etapas.
 
-**"E no meu projeto, o que seria um recurso?"** Em web-data-viz manipulamos os recursos **usuário**, **aviso** e **medida**. Podemos conferir isso vendo para quais entidades foram criados os caminhos de inserção e captura de dados, que envolve os diretórios **routes**, **controllers** e **models**.
+## Organização e aprendizado
 
-Abaixo, uma figura que ajuda a compreender o caminho percorrido para, por exemplo, efetuar o cadastro de um usuário:
+Utilizo o Trello para organizar as tarefas e o GitHub para registrar a evolução do projeto com commits frequentes.
 
+O apoio de inteligência artificial é registrado no Diário de Prompts, indicando o que pedi, utilizei e alterei durante o desenvolvimento.
 
-![image](https://github.com/user-attachments/assets/d576f178-0da6-437e-b5c9-658e3ebaf6ca)
+As orientações do projeto estão no [AGENTS.md](AGENTS.md).
 
+## Créditos
 
+Base da aplicação: Web Data Viz, fornecida pela faculdade como material de apoio.
 
-**Entendi o que é um recurso e gostaria de adicionar um novo ao meu projeto! Como faz?**  
-- Primeiro, crie a tabela no Banco de Dados referente a este recurso. Exemplos de recursos comuns de serem adicionados ao projeto no primeiro semestre: Silo, Aquário, Sala, Andar, Endereço, Mercado, Prateleira, Unidade, Carro, Caminhão...  
-- Assim que criada a tabela, faça todo o caminho de **front-end → routes → controllers → models** replicando o que já existe!  
-- Exemplo, se você quiser a funcionalidade de adicionar um novo Aquário, deve criar arquivos referentes ao aquario nos diretórios e replicar também as funções.  
-- Dica: A implementação de AVISO já contém o CRUD completo! :wink:
- 
-### Fontes bibliográficas
-
-[1] https://datatracker.ietf.org/doc/html/rfc2396  
-[2] https://datatracker.ietf.org/doc/html/rfc7231
+Adaptação e desenvolvimento do Triply: **Thais Nunes de Medeiros**.
