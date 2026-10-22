@@ -76,7 +76,6 @@ body {
 .logo {
   display: flex;
   align-items: center;
-  flex-shrink: 0;
 }
 
 .logo img {
@@ -249,7 +248,7 @@ body {
 /* MISSÃO VISÃO VALORES */
 
 .social {
-  background-color: #e5e5e5;
+  background-color: #FFFFFF;
   display: flex;
 }
 
@@ -278,12 +277,52 @@ body {
   align-items: center;
 }
 
+.social .box h4 {
+  font-size: 18px;
+  color: #171126;
+  margin-bottom: 10px;
+}
+
+.social .box h4 span {
+  color: #E91E83;
+  margin-right: 8px;
+}
+
+.banner-final {
+  background-image: url("../assets/imgs/banner-final.png");
+  background-size: cover;
+  /* faz a imagem preencher o banner*/
+  background-position: center;
+  width: 85%;
+  margin: 50px auto;
+  padding: 40px;
+  border-radius: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.banner-final h2 {
+  color: white;
+  font-size: 26px;
+  width: 50%;
+}
+
+.banner-final a {
+  background-color: white;
+  color: #820AD1;
+  padding: 15px 25px;
+  border-radius: 30px;
+  text-decoration: none;
+}
+
 /* FOOTER */
 
 .footer {
-  background-color: #32b9cd;
+  background-color: #FFFFFF;
   height: 150px;
-  color: #fff;
+  color: #171126;
+  font-weight: 600;
   display: flex;
   font-size: 15px;
 }
@@ -291,10 +330,23 @@ body {
 .footer .container {
   justify-content: center;
   text-align: center;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-direction: column;
+}
+
+.footer img {
+  display: flex;
+  align-items: center;
+  display: block;
+  width: 140px;
+  height: auto;
 }
 
 .footer .container .version {
   font-size: 12px;
+  color: #5B5470;
 }
 
 /* LOGIN */
