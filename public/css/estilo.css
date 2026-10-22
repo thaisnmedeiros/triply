@@ -325,6 +325,7 @@ body {
   font-weight: 600;
   display: flex;
   font-size: 15px;
+  padding: 25px 0;
 }
 
 .footer .container {
@@ -353,7 +354,8 @@ body {
 
 .login {
   height: var(--tamanho-login);
-  background-image: url('../assets/imgs/bg-jelly-fish-para-home.png');
+  /* ja fazia parte da API.*/
+  background-image: url('../assets/imgs/background-login.png');
   background-size: cover;
 }
 
@@ -365,15 +367,15 @@ body {
 
 .card {
   width: 50%;
-  background-color: #e5e5e5;
-  border-radius: 10px;
+  background-color: #FFFFFF;
+  border-radius: 20px;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
-  color: palevioletred;
+  color: #5200A3;
   flex-direction: column;
   height: fit-content;
-  padding: 20px 0;
+  padding: 30px;
 }
 
 .card h2 {
@@ -392,17 +394,21 @@ body {
 .formulario span {
   font-size: 15px;
   font-weight: 800;
+  margin-bottom: 10px;
 }
 
 .formulario input {
-  border: 2px solid #32b9cd;
+  border: 2px solid #D8C5F2;
   text-align: center;
   border-radius: 10px;
   margin: 0;
+  margin-bottom: 10px;
+  text-align: left;
+  padding-left: 15px;
 }
 
 .formulario select {
-  border: 2px solid #32b9cd;
+  border: 2px solid #D8C5F2;
   background-color: white;
   color: gray;
   height: 36px;
@@ -422,15 +428,22 @@ body {
   cursor: pointer;
   font-family: "Barlow", sans-serif;
   border: 0;
-  border-radius: 5px;
+  border-radius: 12px;
   font-weight: 600;
-  font-size: 18px;
+  font-size: 16px;
   color: #fff;
-  background-color: #ED145B;
-  width: 120px;
-  height: 30px;
+  background-color: #820AD1;
+  width: 100%;
+  height: 48px;
   align-self: center;
   margin-top: 20px;
+  padding: 12px;
+  cursor: pointer;
+}
+
+.card-cadastro button:hover {
+  background-color: #643BD5;
+  transform: scale(1.02);
 }
 
 .loading-div {

@@ -51,16 +51,13 @@
     </div>
     <div class="container">
       <div class="card card-cadastro">
-        <h2>Bem-vindo!</h2>
+        <h2>Crie sua conta</h2>
+        <p>Comece a planejar suas próximas viagens.</p>
         <div class="formulario">
           <!--
                          Para inserir mais um campo, copie uma das inputs abaixo.
                          Assim que inserir vá para o script abaixo.
                      -->
-          <div class="campo">
-            <span>Código de ativação:</span>
-            <input id="codigo_input" type="text" placeholder="Insira aqui seu código" />
-          </div>
           <div class="campo">
             <span>Nome:</span>
             <input id="nome_input" type="text" placeholder="Seu nome" />
@@ -79,6 +76,9 @@
           </div>
           <button class="botao" onclick="cadastrar()">Cadastrar</button>
         </div>
+        <p class="link-login">
+          Já tem uma conta? <a href="login.html">Entrar</a>
+        </p>
         <div id="div_aguardar" class="loading-div">
           <img src="./assets/circle-loading.gif" id="loading-gif" />
         </div>
@@ -91,7 +91,9 @@
   <!--footer inicio-->
   <div class="footer">
     <div class="container">
-      <h4>Feito com amor por aluno &hearts; SPTech &copy; 2023-2026</h4>
+      <img src="./assets/imgs/logo.png" alt="Triply">
+      <h3>Triply — Sua viagem, do seu jeito.</h3>
+      <p>Projeto individual de Análise e Desenvolvimento de Sistemas • SPTech • 2026</p>
     </div>
   </div>
   <!--footer fim-->
