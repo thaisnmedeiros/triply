@@ -11,9 +11,13 @@ Estou utilizando a Web Data Viz, disponibilizada pela faculdade, como base para 
 
 ## Sobre o projeto
 
-A proposta do Triply é ajudar o usuário a organizar suas viagens, reunindo roteiro, orçamento e preparativos em um só lugar.
+O Triply é uma plataforma web de organização de viagens, criada com a proposta de reunir roteiros, despesas e preparativos em um só lugar, facilitando o planejamento de quem deseja viajar.
 
-Escolhi esse tema porque estou planejando uma viagem para reencontrar minha família depois de oito meses. Para mim, viajar também significa realizar sonhos e estar perto de pessoas importantes. Quis trazer esse significado para o projeto.
+Escolhi esse tema porque estou planejando uma viagem para reencontrar minha família depois de oito meses longe. Foi pensando nessa viagem e em tudo o que precisava organizar que surgiu a ideia de criar o Triply.
+
+O projeto está sendo desenvolvido na disciplina de Pesquisa e Inovação, durante meu primeiro semestre de Análise e Desenvolvimento de Sistemas na SPTech.
+
+Para mim, viajar vai além de conhecer lugares novos. É também uma oportunidade de viver experiências, realizar sonhos e estar perto das pessoas que são importantes para nós.
 
 ## Funcionalidades planejadas
 
