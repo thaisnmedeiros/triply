@@ -599,3 +599,106 @@ input {
     transform: rotate(25deg)
   }
 }
+
+/* TELA DE CADASTRO */
+
+.cadastro {
+  display: flex;
+  min-height: 650px;
+  flex: 1;
+  /* Ocupa o espaço disponível entre o cabeçalho e o rodapé. */
+}
+
+/* Inclui o padding e a borda na largura dos elementos,
+   evitando que as duas partes ultrapassem 100% da tela. */
+.cadastro,
+.cadastro * {
+  box-sizing: border-box;
+}
+
+.pagina-cadastro {
+  min-height: 100vh;
+  /* Faz a página ocupar pelo menos a altura da tela. */
+  display: flex;
+  flex-direction: column;
+}
+
+.pagina-cadastro .header {
+  flex-shrink: 0;
+  /* Impede que o cabeçalho seja comprimido. */
+}
+
+.cadastro-paisagem {
+  width: 50%;
+  display: flex;
+  align-items: flex-end;
+  padding: 40px;
+
+  /* O degradê escurece a parte inferior da foto
+     para facilitar a leitura do texto branco. */
+  background-image:
+    linear-gradient(to top, rgba(23, 18, 36, 0.8), transparent 65%),
+    url("../assets/imgs/imagem\ -\ cadastro.png");
+
+  /* Preenche o espaço com a foto sem deformar,
+     podendo cortar um pouco das bordas. */
+  background-size: cover;
+  background-position: center;
+}
+
+.cadastro-mensagem {
+  color: white;
+}
+
+.cadastro-mensagem h1 {
+  margin: 0 0 16px;
+  font-size: 40px;
+  line-height: 1.1;
+  /* Espaçamento entre as linhas do título. */
+}
+
+.cadastro-mensagem span {
+  color: #FF5CB4;
+}
+
+.cadastro-mensagem p {
+  margin: 0;
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+.cadastro-area {
+  width: 50%;
+  padding: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #F8F1FF;
+}
+
+.cadastro-area .card {
+  width: 100%;
+  max-width: 440px;
+  /* Limita a largura do cartão. */
+  align-items: stretch;
+  /* Permite que o conteúdo ocupe a largura interna. */
+}
+
+.cadastro-area .formulario {
+  width: 100%;
+}
+
+.cadastro-area .link-login {
+  text-align: center;
+}
+
+/* RODAPÉ DO CADASTRO */
+
+.pagina-cadastro .footer {
+  height: auto;
+  padding: 16px 0;
+}
+
+.pagina-cadastro .footer img {
+  display: none;
+}

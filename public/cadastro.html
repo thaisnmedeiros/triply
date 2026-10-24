@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>AquaTech | Cadastro</title>
+  <title>Triply | Cadastro</title>
 
   <script src="./js/sessao.js"></script>
 
@@ -15,7 +15,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" />
 </head>
 
-<body onload="listar()">
+<body class="pagina-cadastro" onload="listar()">
   <!--header inicio-->
   <div class="header">
     <div class="container">
@@ -23,33 +23,35 @@
         <img src="./assets/imgs/logo.png" alt="Triply">
       </a>
       <ul class="navbar">
-        <li class="agora">
-          <a href="#como-funciona">Como funciona</a>
+        <li>
+          <a href="index.html#como-funciona">Como funciona</a>
         </li>
         <li>
-          <a href="#destinos">Destinos</a>
+          <a href="index.html#destinos">Destinos</a>
         </li>
         <li>
-          <a href="#sobre">Sobre o projeto</a>
+          <a href="index.html#sobre">Sobre o projeto</a>
         </li>
-        <li>
-          <a href="login.html">Entrar</a>
-        </li>
-        <li>
-          <a href="cadastro.html" class="botao-cadastro">Criar conta</a>
+        <a href="cadastro.html" class="botao-cadastro">Criar conta</a>
         </li>
       </ul>
     </div>
   </div>
   <!--header fim-->
 
-  <div class="login">
-    <div class="alerta_erro">
-      <div class="card_erro" id="cardErro">
-        <span id="mensagem_erro"></span>
+  <div class="cadastro">
+    <section class="cadastro-paisagem">
+      <div class="cadastro-mensagem">
+        <h1>
+          Sua próxima viagem<br>começa <span>aqui.</span>
+        </h1>
+        <p>
+          Organize seus destinos, roteiros, despesas e muito mais, em um só lugar.
+        </p>
       </div>
-    </div>
-    <div class="container">
+    </section>
+
+    <div class="cadastro-area">
       <div class="card card-cadastro">
         <h2>Crie sua conta</h2>
         <p>Comece a planejar suas próximas viagens.</p>
