@@ -320,34 +320,59 @@ body {
 
 .footer {
   background-color: #FFFFFF;
-  height: 150px;
-  color: #171126;
-  font-weight: 600;
-  display: flex;
-  font-size: 15px;
-  padding: 25px 0;
+  background-image: url("../assets/imgs/footer\ -\ cadastro.png");
+  background-size: cover;
+  /* Faz o fundo preencher o rodapé. */
+  background-position: center top;
+  color: #3F1768;
+  text-align: center;
 }
 
 .footer .container {
-  justify-content: center;
-  text-align: center;
-  display: flex;
-  align-items: center;
-  gap: 10px;
   flex-direction: column;
 }
 
-.footer img {
+.footer-topo {
   display: flex;
+  flex-direction: column;
+  /* Coloca logo, texto e links um abaixo do outro. */
   align-items: center;
-  display: block;
-  width: 140px;
-  height: auto;
+  gap: 20px;
 }
 
-.footer .container .version {
-  font-size: 12px;
-  color: #5B5470;
+.footer img {
+  display: block;
+  width: 180px;
+  margin: auto;
+  /* Centraliza a imagem dentro do bloco dela. */
+}
+
+.footer p {
+  margin: 12px 0 0;
+}
+
+.footer-links {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.footer-links a {
+  color: #3F1768;
+  text-decoration: none;
+}
+
+.footer-links a:hover {
+  color: #D6298E;
+}
+
+.footer .footer-creditos {
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid #D8C5E8;
+  text-align: center;
+  font-size: 14px;
+  color: #666173;
 }
 
 /* LOGIN */
@@ -697,8 +722,4 @@ input {
 .pagina-cadastro .footer {
   height: auto;
   padding: 16px 0;
-}
-
-.pagina-cadastro .footer img {
-  display: none;
 }
