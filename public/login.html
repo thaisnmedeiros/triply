@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>AquaTech | Login</title>
+    <title>Triply | Login</title>
 
     <script src="./js/sessao.js"></script>
 
@@ -45,13 +45,6 @@
         </div>
     </div>
 
-
-    <div class="alerta_erro">
-        <div class="card_erro" id="cardErro">
-            <span id="mensagem_erro"></span>
-        </div>
-    </div>
-
     <div class="cadastro login">
         <section class="cadastro-paisagem">
             <div class="cadastro-mensagem">
@@ -74,6 +67,9 @@
                         <input id="senha_input" type="password" placeholder="Digite sua senha">
                     </div>
                     <button class="botao" onclick="entrar()">Entrar na minha conta</button>
+                    <div class="card_erro" id="cardErro">
+                        <span id="mensagem_erro"></span>
+                    </div>
                 </div>
 
                 <p class="link-cadastro">Ainda não tem uma conta? <a href="cadastro.html">Criar conta</a></p>
@@ -105,19 +101,15 @@
     var tentativas = 0;
 
     function entrar() {
-        aguardar();
 
         var emailVar = email_input.value;
         var senhaVar = senha_input.value;
 
         if (emailVar == "" || senhaVar == "") {
             cardErro.style.display = "block"
-            mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
-            finalizarAguardar();
+            mensagem_erro.innerHTML = "⚠️ Preencha todos os campos!";
+
             return false;
-        }
-        else {
-            setInterval(sumirMensagem, 5000)
         }
 
         console.log("FORM LOGIN: ", emailVar);
@@ -165,15 +157,13 @@
                 /* Faz a caixa de erro da API aparecer na tela*/
 
                 if (restantes > 0) {
-                    mensagem_erro.innerHTML = `E-mail ou senha inválidos! Restam ${restantes} tentativa(s).`;
+                    mensagem_erro.innerHTML = `⚠️ E-mail ou senha inválidos! Restam ${restantes} tentativa(s).`;
                 } else {
-                    mensagem_erro.innerHTML = "Você atingiu o limite de 3 tentativas! Login bloqueado.";
+                    mensagem_erro.innerHTML = "⚠️ Você atingiu o limite de 3 tentativas! Login bloqueado.";
                     email_input.disabled = true;
                     /* Trava a caixinha de login e senha*/
                     senha_input.disabled = true;
                 }
-
-                finalizarAguardar();
             }
 
         }).catch(function (erro) {

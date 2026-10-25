@@ -496,13 +496,13 @@ body {
 .card_erro {
   display: none;
   background-color: #fff;
-  color: black;
-  width: 230px;
-  position: fixed;
-  border-radius: 4px;
-  border: #ED145B 3px solid;
-  padding: 10px;
-  margin-right: 10%;
+  color: #581c87;
+  text-align: center;
+  font-size: 12px;
+  border-left: 1px #643BD5;
+  padding: 4px;
+  margin-top: 10px;
+  width: 100%;
 }
 
 .card_erro #mensagem_erro {
