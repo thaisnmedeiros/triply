@@ -628,7 +628,9 @@ input {
 
 .cadastro {
   display: flex;
-  min-height: 650px;
+  /* 100vh é a altura da janela do navegador
+  80 px é o cabeçalho. o calculo faz a subtracao entre eles pra o cadastro ocupar tudo */
+  min-height: calc(100vh - 80px);
   flex: 1;
   /* Ocupa o espaço disponível entre o cabeçalho e o rodapé. */
 }
@@ -714,6 +716,17 @@ input {
 
 .cadastro-area .link-login {
   text-align: center;
+  color: #666173;
+}
+
+.cadastro-area .link-login a {
+  color: #820AD1;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.cadastro-area .link-login a:hover {
+  text-decoration: underline;
 }
 
 /* RODAPÉ DO CADASTRO */
