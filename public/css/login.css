@@ -1,0 +1,113 @@
+/* CSS do Login feito pelo OpenCode*/
+.pagina-login {
+  min-height: 100vh;
+  /* Ocupa pelo menos a altura da janela, podendo crescer. */
+  display: flex;
+  flex-direction: column;
+  /* Organiza cabeçalho, conteúdo e rodapé na vertical. */
+}
+
+.pagina-login .header,
+.pagina-login .footer {
+  flex-shrink: 0;
+  /* Mantém a altura do cabeçalho e do rodapé. */
+}
+
+.login {
+  height: auto;
+  min-height: auto;
+  /* Substitui o mínimo de 650px e respeita a altura do conteúdo. */
+  background-image: none;
+}
+
+.login .cadastro-paisagem {
+  width: 45%;
+  padding: 0;
+  background-image: url("../assets/imgs/background-login.png");
+}
+
+.login .cadastro-mensagem {
+  width: 100%;
+  padding: 40px;
+  background-color: rgba(23, 18, 36, 0.75);
+}
+
+.login .cadastro-area {
+  width: 55%;
+  padding: 48px;
+}
+
+.login .card-login {
+  max-width: 520px;
+  padding: 40px;
+  box-shadow: 0 12px 40px rgba(63, 23, 104, 0.08);
+}
+
+.login .card-login h2 {
+  color: #820AD1;
+  font-size: 32px;
+  line-height: 1.2;
+}
+
+/* Seleciona os parágrafos diretamente dentro do cartão. */
+.login .card-login>p {
+  margin: 16px 0 28px;
+  color: #666173;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.login .formulario {
+  height: auto;
+  gap: 18px;
+}
+
+.login .campo {
+  padding: 0;
+}
+
+.login .formulario span {
+  color: #820AD1;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.login .formulario input {
+  height: 48px;
+  margin: 0;
+  border: 1px solid #D8C5F2;
+  color: #3F1768;
+  /* Usa a mesma fonte do restante da página. */
+  font-family: inherit;
+  font-size: 16px;
+}
+
+.login .botao {
+  height: auto;
+  min-height: 50px;
+  margin-top: 6px;
+  font-size: 18px;
+}
+
+.login .botao:hover {
+  background-color: #6908A8;
+}
+
+.login .card-login .link-cadastro {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 28px 0 0;
+}
+
+.login .link-cadastro a {
+  color: #820AD1;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.login .link-cadastro a:hover {
+  text-decoration: underline;
+}

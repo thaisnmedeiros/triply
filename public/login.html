@@ -11,11 +11,12 @@
     <script src="./js/sessao.js"></script>
 
     <link rel="stylesheet" href="./css/estilo.css">
+    <link rel="stylesheet" href="./css/login.css">
     <link rel="icon" type="image/png" href="assets/imgs/triply-icon.png">
     <link rel="preconnect" href="https://fonts.gstatic.com">
 </head>
 
-<body>
+<body class="pagina-login">
 
     <!--Header-->
 
@@ -45,26 +46,37 @@
     </div>
 
 
-    <div class="login">
-        <div class="alerta_erro">
-            <div class="card_erro" id="cardErro">
-                <span id="mensagem_erro"></span>
-            </div>
+    <div class="alerta_erro">
+        <div class="card_erro" id="cardErro">
+            <span id="mensagem_erro"></span>
         </div>
-        <div class="container">
+    </div>
+
+    <div class="cadastro login">
+        <section class="cadastro-paisagem">
+            <div class="cadastro-mensagem">
+                <h1>Viajar é dar lugar ao que<br><span>importa.</span></h1>
+                <p>Entre na sua conta e continue transformando seus sonhos em planos.</p>
+            </div>
+        </section>
+
+        <div class="cadastro-area">
             <div class="card card-login">
-                <h2>Olá de volta!</h2>
+                <h2>Bem-vindo de volta!</h2>
+                <p>Entre na sua conta e continue planejando suas próximas viagens.</p>
                 <div class="formulario">
                     <div class="campo">
                         <span>E-mail:</span>
-                        <input id="email_input" type="text" placeholder="Login">
+                        <input id="email_input" type="text" placeholder="seu@email.com">
                     </div>
                     <div class="campo">
                         <span>Senha:</span>
-                        <input id="senha_input" type="password" placeholder="******">
+                        <input id="senha_input" type="password" placeholder="Digite sua senha">
                     </div>
-                    <button class="botao" onclick="entrar()">Entrar</button>
+                    <button class="botao" onclick="entrar()">Entrar na minha conta</button>
                 </div>
+
+                <p class="link-cadastro">Ainda não tem uma conta? <a href="cadastro.html">Criar conta</a></p>
 
                 <div id="div_aguardar" class="loading-div">
                     <img src="./assets/circle-loading.gif" id="loading-gif">
