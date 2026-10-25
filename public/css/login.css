@@ -21,7 +21,7 @@
 }
 
 .login .cadastro-paisagem {
-  width: 45%;
+  width: 50%;
   padding: 0;
   background-image: url("../assets/imgs/background-login.png");
 }
@@ -33,7 +33,7 @@
 }
 
 .login .cadastro-area {
-  width: 55%;
+  width: 50%;
   padding: 48px;
 }
 
