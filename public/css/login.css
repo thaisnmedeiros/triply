@@ -14,9 +14,8 @@
 }
 
 .login {
+  height: var(--tamanho-login);
   height: auto;
-  min-height: auto;
-  /* Substitui o mínimo de 650px e respeita a altura do conteúdo. */
   background-image: none;
 }
 
