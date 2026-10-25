@@ -157,9 +157,10 @@
                 /* Faz a caixa de erro da API aparecer na tela*/
 
                 if (restantes > 0) {
-                    mensagem_erro.innerHTML = `⚠️ E-mail ou senha inválidos! Restam ${restantes} tentativa(s).`;
+                    mensagem_erro.innerHTML = `E-mail ou senha inválidos! Restam ${restantes} tentativa(s).`;
                 } else {
-                    mensagem_erro.innerHTML = "⚠️ Você atingiu o limite de 3 tentativas! Login bloqueado.";
+                    mensagem_erro.innerHTML = "Você atingiu o limite de 3 tentativas! Login bloqueado.";
+
                     email_input.disabled = true;
                     /* Trava a caixinha de login e senha*/
                     senha_input.disabled = true;

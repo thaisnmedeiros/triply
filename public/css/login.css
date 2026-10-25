@@ -111,3 +111,14 @@
 .login .link-cadastro a:hover {
   text-decoration: underline;
 }
+
+.login .card_erro {
+  box-sizing: border-box;
+}
+
+.card_erro #mensagem_erro {
+  color: #c62828;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.5;
+}
