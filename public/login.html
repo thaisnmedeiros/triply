@@ -27,7 +27,7 @@
             </a>
             <ul class="navbar">
                 <li class="agora">
-                    <a href="#como-funciona">Como funciona</a>
+                    <a href="index.html#como-funciona">Como funciona</a>
                 </li>
                 <li>
                     <a href="#destinos">Destinos</a>
@@ -98,7 +98,7 @@
 
 <script>
 
-    var tentativas = 0;
+    var tentativas = [];
 
     function entrar() {
 
@@ -136,7 +136,6 @@
                     sessionStorage.EMAIL_USUARIO = json.email;
                     sessionStorage.NOME_USUARIO = json.nome;
                     sessionStorage.ID_USUARIO = json.id;
-                    sessionStorage.AQUARIOS = JSON.stringify(json.aquarios)
 
                     setTimeout(function () {
                         window.location = "./dashboard/cards.html";
@@ -144,27 +143,24 @@
 
                 });
 
-                // E substitua o bloco do else dentro do fetch por este:
             } else {
-                tentativas++;
+                tentativas.push("Login incorreto");
                 var restantes = 0;
-
-                for (var contador = tentativas; contador < 3; contador++) {
+                for (var contador = tentativas.length; contador < 3; contador++) {
                     restantes++;
                 }
 
                 cardErro.style.display = "block";
-                /* Faz a caixa de erro da API aparecer na tela*/
 
                 if (restantes > 0) {
                     mensagem_erro.innerHTML = `E-mail ou senha inválidos! Restam ${restantes} tentativa(s).`;
                 } else {
                     mensagem_erro.innerHTML = "Você atingiu o limite de 3 tentativas! Login bloqueado.";
-
-                    email_input.disabled = true;
                     /* Trava a caixinha de login e senha*/
+                    email_input.disabled = true;
                     senha_input.disabled = true;
                 }
+
             }
 
         }).catch(function (erro) {
@@ -173,7 +169,6 @@
 
         return false;
     }
-
     function sumirMensagem() {
         cardErro.style.display = "none"
     }
