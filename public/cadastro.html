@@ -127,17 +127,25 @@
 
 
   function cadastrar() {
-    var erros = [];
 
     var nomeVar = nome_input.value;
     var emailVar = email_input.value;
     var senhaVar = senha_input.value;
     var confirmacaoSenhaVar = confirmacao_senha_input.value;
 
-    erro_nome.innerHTML = "";
-    erro_email.innerHTML = "";
-    erro_senha.innerHTML = "";
-    erro_confirmacao.innerHTML = "";
+    var erros = [];
+
+    var campos = [nomeVar, emailVar, senhaVar, confirmacaoSenhaVar];
+    var mensagens = [erro_nome, erro_email, erro_senha, erro_confirmacao];
+
+    // Verifica se os 4 campos (nome, email, senha e confirmacao) estao preenchidos
+    for (var i = 0; i < campos.length; i++) {
+      mensagens[i].innerHTML = "";
+      if (campos[i] == "") {
+        mensagens[i].innerHTML = "Este campo é obrigatório!";
+        erros.push("Campo vazio");
+      }
+    }
 
     // Verificando nome vazio
     if (nomeVar == "") {
@@ -146,28 +154,19 @@
     }
 
     // Verificando email (se está vazio, se tem @ e '.', porque tem emails que terminal com .br, .org etc)
-    if (emailVar == "") {
-      erro_email.innerHTML = "Preencha seu e-mail!";
-      erros.push("E-mail obrigatório");
-    } else if (!emailVar.includes("@") || !emailVar.includes(".")) {
+    if (emailVar != "" && (!emailVar.includes("@") || !emailVar.includes("."))) {
       erro_email.innerHTML = "Digite um e-mail válido!";
       erros.push("E-mail inválido");
     }
 
-    // Verificando a enha
-    if (senhaVar == "") {
-      erro_senha.innerHTML = "Preencha sua senha!";
-      erros.push("Senha obrigatória");
-    } else if (senhaVar.length < 8) {
+    // Verificando a senha
+    if (senhaVar != "" && senhaVar.length < 8) {
       erro_senha.innerHTML = "Sua senha precisa ter pelo menos 8 caracteres!";
       erros.push("Senha inválida");
     }
 
     // Verificando a confirmação da senha
-    if (confirmacaoSenhaVar == "") {
-      erro_confirmacao.innerHTML = "Confirme sua senha!";
-      erros.push("Confirmação obrigatória");
-    } else if (senhaVar != confirmacaoSenhaVar) {
+    if (senhaVar != "" && confirmacaoSenhaVar != "" && senhaVar != confirmacaoSenhaVar) {
       erro_confirmacao.innerHTML = "As senhas não coincidem!";
       erros.push("Senhas diferentes");
     }
