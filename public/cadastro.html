@@ -32,7 +32,8 @@
         <li>
           <a href="index.html#sobre">Sobre o projeto</a>
         </li>
-        <a href="cadastro.html" class="botao-cadastro">Criar conta</a>
+        <li>
+          <a href="cadastro.html" class="botao-cadastro">Criar conta</a>
         </li>
       </ul>
     </div>
@@ -145,12 +146,6 @@
         mensagens[i].innerHTML = "Este campo é obrigatório!";
         erros.push("Campo vazio");
       }
-    }
-
-    // Verificando nome vazio
-    if (nomeVar == "") {
-      erro_nome.innerHTML = "Preencha seu nome!";
-      erros.push("Nome inválido");
     }
 
     // Verificando email (se está vazio, se tem @ e '.', porque tem emails que terminal com .br, .org etc)
