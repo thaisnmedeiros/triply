@@ -1118,6 +1118,12 @@ input {
   text-decoration: underline;
 }
 
+.pagina-cadastro .campo span[id] {
+  color: #E53935;
+  font-size: 13px;
+  font-weight: normal;
+}
+
 /* RODAPÉ DO CADASTRO */
 
 .pagina-cadastro .footer {
