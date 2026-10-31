@@ -159,10 +159,15 @@
       erros.push("E-mail inválido");
     }
 
-    // Verificando a senha
-    if (senhaVar != "" && senhaVar.length < 8) {
-      erro_senha.innerHTML = "Sua senha precisa ter pelo menos 8 caracteres!";
-      erros.push("Senha inválida");
+    // Verificando a senha (nao vazia, letra maiuscula e minuscula)
+    if (senhaVar != "") {
+      if (senhaVar.length < 8 ||
+        senhaVar == senhaVar.toUpperCase() ||
+        senhaVar == senhaVar.toLowerCase()) {
+
+        erro_senha.innerHTML = "A senha precisa ter pelo menos 8 caracteres, uma letra maiúscula e uma minúscula!";
+        erros.push("Senha inválida");
+      }
     }
 
     // Verificando a confirmação da senha
