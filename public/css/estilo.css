@@ -1124,9 +1124,131 @@ input {
   font-weight: normal;
 }
 
-/* RODAPÉ DO CADASTRO */
-
 .pagina-cadastro .footer {
   height: auto;
   padding: 16px 0;
+}
+
+
+/* Minhas viagens */
+
+body.minhas-viagens {
+  margin: 0;
+  padding: 0;
+}
+
+.pagina-viagens {
+  display: flex;
+  min-height: 100vh;
+  background-color: #F8F6FC;
+}
+
+.menu-lateral {
+  width: 250px;
+  /* Faz o menu ocupar exatamente a altura da tela.*/
+  height: 100vh;
+  background-color: white;
+  padding: 30px 20px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  /* faz a logo e os links ficarem na parte de cima, e o "sair" ficar embaixo */
+  justify-content: space-between;
+  /* O menu aparece mesmo quando rola a pagina*/
+  position: sticky;
+  /* deixa o menu preso no todo da tela*/
+  top: 0;
+}
+
+/* Links do menu */
+.menu {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.menu .logo {
+  margin-bottom: 35px;
+}
+
+.menu .logo img {
+  width: 130px;
+}
+
+.menu a {
+  /* text-decoration: none: remove o sublinhado */
+  text-decoration: none;
+  color: #5E566A;
+  font-size: 15px;
+  padding: 12px 15px;
+  border-radius: 10px;
+}
+
+.menu a:hover {
+  background-color: #F0E8FA;
+  color: #7142B7;
+}
+
+.menu .ativo {
+  background-color: #7142B7;
+  color: white;
+}
+
+.sair-menu {
+  text-decoration: none;
+  color: #5E566A;
+  font-size: 15px;
+  padding: 12px 15px;
+  border-radius: 10px;
+}
+
+.sair-menu:hover {
+  background-color: #F0E8FA;
+  color: #7142B7;
+}
+
+/* Conteúdo principal */
+.conteudo-viagens {
+  flex: 1;
+  padding: 60px;
+}
+
+.conteudo-viagens h6 {
+  color: #7142B7;
+  font-size: 13px;
+  letter-spacing: 2px;
+  margin-bottom: 15px;
+}
+
+.conteudo-viagens h1 {
+  color: #292333;
+  font-size: 36px;
+  margin-bottom: 15px;
+}
+
+.conteudo-viagens p {
+  color: #777080;
+  font-size: 16px;
+}
+
+.cabecalho-viagens {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 30px;
+}
+
+.botao-nova-viagem {
+  background-color: #8700D4;
+  color: white;
+  padding: 18px 30px;
+  border-radius: 12px;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+.botao-nova-viagem:hover {
+  background-color: #6900AA;
 }
