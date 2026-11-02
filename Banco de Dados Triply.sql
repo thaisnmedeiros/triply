@@ -1,17 +1,7 @@
--- ==========================================
--- TRIPLY
--- Projeto Individual - SPTech
--- Banco de Dados MySQL
--- ==========================================
-
 CREATE DATABASE triply;
-
 USE triply;
 
--- ==========================================
--- TABELA USUARIO
--- ==========================================
-
+-- Tabela de usuários
 CREATE TABLE usuario (
     idUsuario INT PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(100) NOT NULL,
@@ -19,11 +9,9 @@ CREATE TABLE usuario (
     senha VARCHAR(255) NOT NULL
 );
 
+select * from usuario;
 
--- ==========================================
--- TABELA VIAGEM
--- ==========================================
-
+-- Tabela de viagens
 CREATE TABLE viagem (
     idViagem INT PRIMARY KEY AUTO_INCREMENT,
     titulo VARCHAR(100) NOT NULL,
@@ -33,77 +21,68 @@ CREATE TABLE viagem (
     dataFim DATE NOT NULL,
     orcamento DECIMAL(10,2) NOT NULL,
     imagemCapa VARCHAR(255),
-    status VARCHAR(20) NOT NULL DEFAULT 'Planejamento',
+    status VARCHAR(20) NOT NULL,
     fkUsuario INT NOT NULL,
-    CONSTRAINT chkStatusViagem
-        CHECK (status IN (
-            'Planejamento',
-            'Confirmada',
-            'Concluída',
-            'Cancelada'
-        )),
-    CONSTRAINT chkDatasViagem
-        CHECK (dataFim >= dataInicio),
-    CONSTRAINT chkOrcamentoViagem
-        CHECK (orcamento >= 0),
-    CONSTRAINT fkViagemUsuario
-        FOREIGN KEY (fkUsuario)
-        REFERENCES usuario(idUsuario)
+
+    CONSTRAINT chk_status_viagem
+       CHECK (status IN ('Planejamento', 'Confirmada', 'Em andamento', 'Concluída', 'Cancelada')),
+
+    CONSTRAINT fk_viagem_usuario
+        FOREIGN KEY (fkUsuario) REFERENCES usuario(idUsuario),
+        
+	CONSTRAINT chkOrcamento
+		CHECK (orcamento >= 0)
 );
 
-
--- ==========================================
--- TABELA DESPESA
--- ==========================================
-
+-- Tabela de despesas
 CREATE TABLE despesa (
     idDespesa INT PRIMARY KEY AUTO_INCREMENT,
     descricao VARCHAR(150) NOT NULL,
     categoria VARCHAR(50) NOT NULL,
-    valor DECIMAL(10,2) NOT NULL,
+    valorPrevisto DECIMAL(10,2),
+	valorRealizado DECIMAL(10,2),
     dataDespesa DATE,
     status VARCHAR(20) NOT NULL DEFAULT 'Prevista',
     fkViagem INT NOT NULL,
+    
     CONSTRAINT chkStatusDespesa
         CHECK (status IN ('Prevista', 'Paga')),
-    CONSTRAINT chkValorDespesa
-        CHECK (valor >= 0),
+        
+    CONSTRAINT chkValorPrevisto
+        CHECK (valorPrevisto >= 0),
+        
+	CONSTRAINT chkValorRealizado
+		CHECK (valorRealizado >= 0),
+        
     CONSTRAINT fkDespesaViagem
         FOREIGN KEY (fkViagem)
         REFERENCES viagem(idViagem)
 );
 
-
--- ==========================================
--- TABELA EXPERIENCIA
--- ==========================================
-
+-- Tabela de experiências
 CREATE TABLE experiencia (
     idExperiencia INT PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(100) NOT NULL,
     descricao VARCHAR(255),
     localizacao VARCHAR(150),
-    dataExperiencia DATE,
+    dataExperiencia DATE NOT NULL,
     horario TIME,
     fkViagem INT NOT NULL,
-    CONSTRAINT fkExperienciaViagem
-        FOREIGN KEY (fkViagem)
-        REFERENCES viagem(idViagem)
+
+    CONSTRAINT fk_experiencia_viagem
+        FOREIGN KEY (fkViagem) REFERENCES viagem(idViagem)
 );
 
-
--- ==========================================
--- TABELA CHECKLIST
--- ==========================================
-
+-- Tabela de checklist
 CREATE TABLE checklist (
     idChecklist INT PRIMARY KEY AUTO_INCREMENT,
     tarefa VARCHAR(150) NOT NULL,
     concluida TINYINT NOT NULL DEFAULT 0,
     fkViagem INT NOT NULL,
-    CONSTRAINT chkChecklistConcluido
+
+    CONSTRAINT chk_checklist_concluida
         CHECK (concluida IN (0, 1)),
-    CONSTRAINT fkChecklistViagem
-        FOREIGN KEY (fkViagem)
-        REFERENCES viagem(idViagem)
+
+    CONSTRAINT fk_checklist_viagem
+        FOREIGN KEY (fkViagem) REFERENCES viagem(idViagem)
 );
