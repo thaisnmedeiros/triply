@@ -1208,9 +1208,9 @@ body.minhas-viagens {
 }
 
 /* Conteúdo principal */
-.conteudo-viagens {
-  flex: 1;
-  padding: 60px;
+.pagina-nova-viagem .conteudo-viagens {
+  padding: 40px;
+  min-width: 0;
 }
 
 .conteudo-viagens h6 {
@@ -1251,4 +1251,188 @@ body.minhas-viagens {
 
 .botao-nova-viagem:hover {
   background-color: #6900AA;
+}
+
+/* Formulário de nova viagem */
+.cabecalho-nova-viagem {
+  margin-bottom: 15px;
+}
+
+.cabecalho-nova-viagem a {
+  color: #820AD1;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.pagina-nova-viagem .conteudo-viagens {
+  padding: 25px 35px;
+}
+
+.pagina-viagens {
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+}
+
+.pagina-nova-viagem .conteudo-viagens {
+  flex: 1;
+  min-width: 0;
+  padding: 40px;
+  background-image: url('../assets/imgs/background-novaviagem.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.area-nova-viagem {
+  display: flex;
+  gap: 25px;
+  align-items: stretch;
+}
+
+.imagem-nova-viagem {
+  width: 350px;
+  flex-shrink: 0;
+}
+
+.imagem-nova-viagem img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 20px;
+  display: block;
+}
+
+.card-nova-viagem {
+  flex: 1;
+  min-width: 0;
+  background-color: #FCFAFF;
+  padding: 25px;
+  border: 1px solid #E8DDF5;
+  border-radius: 20px;
+  box-sizing: border-box;
+}
+
+.card-nova-viagem h2 {
+  color: #820AD1;
+  font-size: 22px;
+  margin-bottom: 5px;
+}
+
+.card-nova-viagem p {
+  color: #777080;
+  font-size: 14px;
+  margin-bottom: 12px;
+}
+
+.card-nova-viagem {
+  flex: 1;
+  min-width: 0;
+  background-color: #FCFAFF;
+  padding: 20px 25px;
+  border: 1px solid #E8DDF5;
+  border-radius: 20px;
+  box-sizing: border-box;
+}
+
+/* Formulário */
+.formulario-viagem {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.campo-viagem {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 4px;
+  min-width: 0;
+}
+
+.linha-viagem {
+  display: flex;
+  gap: 15px;
+}
+
+.campo-viagem label {
+  font-size: 14px;
+  color: #1D142B;
+  font-weight: bold;
+}
+
+.campo-viagem input,
+.campo-viagem select,
+.campo-viagem textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #DCCBEF;
+  border-radius: 10px;
+  font-size: 14px;
+  box-sizing: border-box;
+  font-family: Arial;
+  background-color: white;
+}
+
+.campo-viagem input,
+.campo-viagem select {
+  height: 40px;
+}
+
+.campo-viagem textarea {
+  height: 55px;
+  resize: none;
+}
+
+.campo-viagem textarea {
+  height: 80px;
+  resize: none;
+}
+
+.campo-viagem input,
+.campo-viagem select {
+  height: 48px;
+}
+
+.campo-viagem input:focus,
+.campo-viagem select:focus,
+.campo-viagem textarea:focus {
+  outline: none;
+  border-color: #820AD1;
+}
+
+.botoes-viagem {
+  display: flex;
+  justify-content: flex-end;
+  gap: 15px;
+  margin-top: 10px;
+  padding-top: 12px;
+  border-top: 1px solid #E8DDF5;
+}
+
+.botoes-viagem a,
+.botoes-viagem button {
+  padding: 14px 25px;
+  border-radius: 10px;
+  font-size: 14px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.botoes-viagem a {
+  background-color: white;
+  color: #820AD1;
+  border: 1px solid #820AD1;
+}
+
+.botoes-viagem button {
+  background-color: #820AD1;
+  color: white;
+  border: none;
+}
+
+.pagina-nova-viagem .campo-viagem span {
+  color: #D6298E;
+  font-size: 12px;
+  height: 16px;
 }

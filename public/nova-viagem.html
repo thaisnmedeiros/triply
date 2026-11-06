@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Triply | Nova Viagem</title>
+
+    <script src="./js/sessao.js"></script>
+
+    <link rel="stylesheet" href="./css/estilo.css">
+    <link rel="icon" type="image/png" href="assets/imgs/triply-icon.png">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+</head>
+
+<body class="pagina-nova-viagem">
+
+    <div class="pagina-viagens">
+
+        <!-- Menu lateral esquerdo -->
+        <div class="menu-lateral">
+
+            <div class="menu">
+
+                <a href="index.html" class="logo">
+                    <img src="./assets/imgs/logo.png" alt="Triply">
+                </a>
+
+                <a href="minhas-viagens.html">Minhas viagens</a>
+                <a href="dashboard.html">Dashboard</a>
+                <a href="nova-viagem.html" class="ativo">Adicionar viagem</a>
+
+            </div>
+
+            <a href="#" onclick="limparSessao()" class="sair-menu">Sair</a>
+
+        </div>
+
+        <!-- Conteúdo principal -->
+        <div class="conteudo-viagens">
+
+            <div class="cabecalho-nova-viagem">
+                <a href="minhas-viagens.html">← Voltar para Minhas Viagens</a>
+            </div>
+
+            <div class="area-nova-viagem">
+                <div class="imagem-nova-viagem">
+                    <img src="./assets/imgs/santorini.jpg" alt="Paisagem de viagem">
+                </div>
+
+                <div class="card-nova-viagem">
+
+                    <h2>Dados da viagem</h2>
+                    <p>Preencha as informações básicas da sua viagem.</p>
+
+                    <div class="formulario-viagem">
+
+                        <!-- Formulário -->
+                        <div class="formulario-viagem">
+
+                            <div class="campo-viagem">
+                                <label for="ipt_nome_viagem">Nome da viagem *</label>
+                                <input type="text" id="ipt_nome_viagem" placeholder="Ex.: Férias em Recife">
+                                <span id="erro_nome"></span>
+                                <label for="ipt_descricao">Descrição da viagem</label>
+                                <textarea id="ipt_descricao"
+                                    placeholder="Ex.: Uma viagem para descansar, conhecer novas praias e aproveitar as férias."></textarea>
+                            </div>
+
+                            <div class="linha-viagem">
+                                <div class="campo-viagem">
+                                    <label for="ipt_destino">Destino *</label>
+                                    <input type="text" id="ipt_destino" placeholder="Ex.: Recife">
+                                    <span id="erro_destino"></span>
+                                </div>
+
+                                <div class="campo-viagem">
+                                    <label for="ipt_pais">País</label>
+                                    <input type="text" id="ipt_pais" placeholder="Ex.: Brasil">
+                                </div>
+                            </div>
+
+                            <div class="linha-viagem">
+                                <div class="campo-viagem">
+                                    <label for="ipt_inicio">Data de início *</label>
+                                    <input type="date" id="ipt_inicio">
+                                    <span id="erro_inicio"></span>
+                                </div>
+
+                                <div class="campo-viagem">
+                                    <label for="ipt_termino">Data de término *</label>
+                                    <input type="date" id="ipt_termino">
+                                    <span id="erro_termino"></span>
+                                </div>
+                            </div>
+
+                            <div class="linha-viagem">
+                                <div class="campo-viagem">
+                                    <label for="ipt_orcamento">Orçamento previsto (R$) *</label>
+                                    <input type="number" id="ipt_orcamento" placeholder="Ex.: 5000">
+                                    <span id="erro_orcamento"></span>
+                                </div>
+
+                                <div class="campo-viagem">
+                                    <label for="ipt_status">Status *</label>
+                                    <select id="ipt_status">
+                                        <option value="">Selecione</option>
+                                        <option value="Planejamento">Em planejamento</option>
+                                        <option value="Confirmada">Confirmada</option>
+                                        <option value="Concluída">Concluída</option>
+                                        <option value="Cancelada">Cancelada</option>
+                                    </select>
+                                    <span id="erro_status"></span>
+                                </div>
+                            </div>
+                            <div class="botoes-viagem">
+                                <a href="minhas-viagens.html">Cancelar</a>
+                                <button onclick="cadastrarViagem()">Criar viagem</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+</body>
+
+</html>
+
+<script>
+
+    function cadastrarViagem() {
+
+        let nome = ipt_nome_viagem.value;
+        let descricao = ipt_descricao.value;
+        let destino = ipt_destino.value;
+        let pais = ipt_pais.value;
+        let dataInicio = ipt_inicio.value;
+        let dataTermino = ipt_termino.value;
+        let orcamento = ipt_orcamento.value;
+        let status = ipt_status.value;
+
+        let campos = [nome, destino, dataInicio, dataTermino, orcamento, status];
+
+        let mensagens = [
+            erro_nome,
+            erro_destino,
+            erro_inicio,
+            erro_termino,
+            erro_orcamento,
+            erro_status
+        ];
+
+        let erros = [];
+
+        // Verifica os campos obrigatórios
+        for (let i = 0; i < campos.length; i++) {
+            mensagens[i].innerHTML = "";
+            if (campos[i] == "") {
+                mensagens[i].innerHTML = "Este campo é obrigatório!";
+                erros.push("Campo vazio");
+            }
+        }
+
+        // Verifica se a data de término é anterior à data de início
+        if (dataInicio != "" && dataTermino != "" && dataTermino < dataInicio) {
+            erro_termino.innerHTML = "A data de término não pode ser anterior à data de início!";
+            erros.push("Data inválida");
+        }
+
+        // Verifica se o orçamento é maior que zero
+        if (orcamento != "" && Number(orcamento) <= 0) {
+            erro_orcamento.innerHTML = "O orçamento precisa ser maior que zero!";
+            erros.push("Orçamento inválido");
+        }
+
+        // Impede o cadastro se houver erros
+        if (erros.length > 0) {
+            return false;
+        }
+
+        // Por enquanto, apenas confirma as validações
+        console.log("Dados da viagem validados com sucesso!");
+        return false;
+    }
+</script>
