@@ -15,6 +15,7 @@ select * from usuario;
 CREATE TABLE viagem (
     idViagem INT PRIMARY KEY AUTO_INCREMENT,
     titulo VARCHAR(100) NOT NULL,
+    descricao VARCHAR(255) NOT NULL,
     destino VARCHAR(100) NOT NULL,
     pais VARCHAR(100),
     dataInicio DATE NOT NULL,
