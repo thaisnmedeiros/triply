@@ -1160,6 +1160,55 @@ body.minhas-viagens {
   top: 0;
 }
 
+/* Lista de viagens */
+.lista-viagens {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 25px;
+  margin-top: 40px;
+}
+
+/* Card de viagem */
+.card-viagem {
+  background-color: white;
+  border: 1px solid #E8DDF5;
+  border-radius: 16px;
+  padding: 25px;
+  width: 300px;
+}
+
+/* Nome da viagem */
+.card-viagem h3 {
+  color: #1D142B;
+  font-size: 22px;
+  margin-bottom: 15px;
+}
+
+/* Informações da viagem */
+.card-viagem p {
+  color: #625A75;
+  font-size: 15px;
+  margin-bottom: 10px;
+}
+
+/* Orçamento */
+.orcamento-viagem {
+  border-top: 1px solid #E8DDF5;
+  margin-top: 20px;
+  padding-top: 15px;
+}
+
+.orcamento-viagem span {
+  color: #625A75;
+  font-size: 13px;
+}
+
+.orcamento-viagem h4 {
+  color: #1D142B;
+  font-size: 22px;
+  margin-top: 8px;
+}
+
 /* Links do menu */
 .menu {
   display: flex;

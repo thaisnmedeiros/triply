@@ -24,6 +24,18 @@ function cadastrar(titulo, descricao, destino, pais, dataInicio, dataFim, orcame
     return database.executar(instrucaoSql, valores);
 }
 
+function listarPorUsuario(fkUsuario) {
+    /*listarPorUsuario*/
+
+    var instrucaoSql = `
+        SELECT * FROM viagem
+        WHERE fkUsuario = ?;
+    `;
+
+    return database.executar(instrucaoSql, [fkUsuario]);
+}
+
 module.exports = {
-    cadastrar
+    cadastrar,
+    listarPorUsuario
 };

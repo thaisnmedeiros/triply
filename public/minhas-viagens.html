@@ -48,9 +48,57 @@
                     + Nova viagem
                 </a>
             </div>
+
+            <!-- Viagens cadastradas -->
+            <div class="lista-viagens" id="lista_viagens">
+            </div>
         </div>
 
     </div>
 
+    <script>
+        function carregarViagens() {
+
+            /* essa parte identifica o usuario logado */
+            let idUsuario = sessionStorage.ID_USUARIO;
+
+            /* busca as viagens */
+            fetch(`/viagens/listar/${idUsuario}`)
+                /* busca os dados da viagem */
+                .then(function (resposta) {
+                    return resposta.json();
+                })
+                .then(function (viagens) {
+
+                    /* percorre as viagens encontradas */
+                    for (let i = 0; i < viagens.length; i++) {
+
+                        lista_viagens.innerHTML += `
+                            <div class="card-viagem">
+                                <h3>${viagens[i].titulo}</h3>
+                                <p>Destino: ${viagens[i].destino}</p>
+                                <p>Status: ${viagens[i].status}</p>
+                                <p>Orçamento: R$ ${viagens[i].orcamento}</p>
+                            </div>
+                        `;
+                    }
+
+                    if (viagens.length == 0) {
+                        lista_viagens.innerHTML = "<p>Você ainda não cadastrou nenhuma viagem.</p>";
+                    }
+
+                })
+                /* mostra os erros */
+                .catch(function (erro) {
+                    console.log("Erro ao carregar viagens:", erro);
+                });
+
+        }
+
+        carregarViagens();
+
+    </script>
 
 </body>
+
+</html>

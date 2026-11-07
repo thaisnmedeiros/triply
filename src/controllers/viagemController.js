@@ -52,6 +52,27 @@ function cadastrar(req, res) {
     }
 }
 
+function listarPorUsuario(req, res) {
+    /*retorna as viagens por usuario */
+
+    let fkUsuario = req.params.fkUsuario;
+
+    if (fkUsuario == undefined) {
+        res.status(400).send("O usuário não foi identificado!");
+    } else {
+
+        viagemModel.listarPorUsuario(fkUsuario)
+            .then(function (resultado) {
+                res.json(resultado);
+            })
+            .catch(function (erro) {
+                console.log(erro);
+                res.status(500).json(erro.sqlMessage);
+            });
+    }
+}
+
 module.exports = {
-    cadastrar
+    cadastrar,
+    listarPorUsuario
 };
