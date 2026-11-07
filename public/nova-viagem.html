@@ -55,75 +55,73 @@
                     <h2>Dados da viagem</h2>
                     <p>Preencha as informações básicas da sua viagem.</p>
 
+                    <!-- Formulário -->
                     <div class="formulario-viagem">
 
-                        <!-- Formulário -->
-                        <div class="formulario-viagem">
+                        <div class="campo-viagem">
+                            <label for="ipt_nome_viagem">Nome da viagem *</label>
+                            <input type="text" id="ipt_nome_viagem" placeholder="Ex.: Férias em Recife">
+                            <span id="erro_nome"></span>
+                            <label for="ipt_descricao">Descrição da viagem</label>
+                            <textarea id="ipt_descricao"
+                                placeholder="Ex.: Uma viagem para descansar, conhecer novas praias e aproveitar as férias."></textarea>
+                        </div>
+
+                        <div class="linha-viagem">
+                            <div class="campo-viagem">
+                                <label for="ipt_destino">Destino *</label>
+                                <input type="text" id="ipt_destino" placeholder="Ex.: Recife">
+                                <span id="erro_destino"></span>
+                            </div>
 
                             <div class="campo-viagem">
-                                <label for="ipt_nome_viagem">Nome da viagem *</label>
-                                <input type="text" id="ipt_nome_viagem" placeholder="Ex.: Férias em Recife">
-                                <span id="erro_nome"></span>
-                                <label for="ipt_descricao">Descrição da viagem</label>
-                                <textarea id="ipt_descricao"
-                                    placeholder="Ex.: Uma viagem para descansar, conhecer novas praias e aproveitar as férias."></textarea>
-                            </div>
-
-                            <div class="linha-viagem">
-                                <div class="campo-viagem">
-                                    <label for="ipt_destino">Destino *</label>
-                                    <input type="text" id="ipt_destino" placeholder="Ex.: Recife">
-                                    <span id="erro_destino"></span>
-                                </div>
-
-                                <div class="campo-viagem">
-                                    <label for="ipt_pais">País</label>
-                                    <input type="text" id="ipt_pais" placeholder="Ex.: Brasil">
-                                </div>
-                            </div>
-
-                            <div class="linha-viagem">
-                                <div class="campo-viagem">
-                                    <label for="ipt_inicio">Data de início *</label>
-                                    <input type="date" id="ipt_inicio">
-                                    <span id="erro_inicio"></span>
-                                </div>
-
-                                <div class="campo-viagem">
-                                    <label for="ipt_termino">Data de término *</label>
-                                    <input type="date" id="ipt_termino">
-                                    <span id="erro_termino"></span>
-                                </div>
-                            </div>
-
-                            <div class="linha-viagem">
-                                <div class="campo-viagem">
-                                    <label for="ipt_orcamento">Orçamento previsto (R$) *</label>
-                                    <input type="number" id="ipt_orcamento" placeholder="Ex.: 5000">
-                                    <span id="erro_orcamento"></span>
-                                </div>
-
-                                <div class="campo-viagem">
-                                    <label for="ipt_status">Status *</label>
-                                    <select id="ipt_status">
-                                        <option value="">Selecione</option>
-                                        <option value="Planejamento">Em planejamento</option>
-                                        <option value="Confirmada">Confirmada</option>
-                                        <option value="Concluída">Concluída</option>
-                                        <option value="Cancelada">Cancelada</option>
-                                    </select>
-                                    <span id="erro_status"></span>
-                                </div>
-                            </div>
-                            <div class="botoes-viagem">
-                                <a href="minhas-viagens.html">Cancelar</a>
-                                <button onclick="cadastrarViagem()">Criar viagem</button>
+                                <label for="ipt_pais">País</label>
+                                <input type="text" id="ipt_pais" placeholder="Ex.: Brasil">
                             </div>
                         </div>
 
+                        <div class="linha-viagem">
+                            <div class="campo-viagem">
+                                <label for="ipt_inicio">Data de início *</label>
+                                <input type="date" id="ipt_inicio">
+                                <span id="erro_inicio"></span>
+                            </div>
+
+                            <div class="campo-viagem">
+                                <label for="ipt_termino">Data de término *</label>
+                                <input type="date" id="ipt_termino">
+                                <span id="erro_termino"></span>
+                            </div>
+                        </div>
+
+                        <div class="linha-viagem">
+                            <div class="campo-viagem">
+                                <label for="ipt_orcamento">Orçamento previsto (R$) *</label>
+                                <input type="number" id="ipt_orcamento" placeholder="Ex.: 5000">
+                                <span id="erro_orcamento"></span>
+                            </div>
+
+                            <div class="campo-viagem">
+                                <label for="ipt_status">Status *</label>
+                                <select id="ipt_status">
+                                    <option value="">Selecione</option>
+                                    <option value="Planejamento">Em planejamento</option>
+                                    <option value="Confirmada">Confirmada</option>
+                                    <option value="Concluída">Concluída</option>
+                                    <option value="Cancelada">Cancelada</option>
+                                </select>
+                                <span id="erro_status"></span>
+                            </div>
+                        </div>
+                        <div class="botoes-viagem">
+                            <a href="minhas-viagens.html">Cancelar</a>
+                            <button onclick="cadastrarViagem()">Criar viagem</button>
+                        </div>
                     </div>
+
                 </div>
             </div>
+        </div>
 </body>
 
 </html>
@@ -180,8 +178,46 @@
             return false;
         }
 
-        // Por enquanto, apenas confirma as validações
-        console.log("Dados da viagem validados com sucesso!");
-        return false;
+        // Recupera o ID do usuário que está logado
+        let fkUsuario = sessionStorage.ID_USUARIO;
+        if (fkUsuario == undefined) {
+            alert("Você precisa fazer login para cadastrar uma viagem!");
+            window.location.href = "login.html";
+            return false;
+        }
+
+        // Envia os dados da viagem para a API
+        fetch("/viagens/cadastrar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                tituloServer: nome,
+                descricaoServer: descricao,
+                destinoServer: destino,
+                paisServer: pais,
+                dataInicioServer: dataInicio,
+                dataFimServer: dataTermino,
+                orcamentoServer: Number(orcamento),
+                statusServer: status,
+                fkUsuarioServer: fkUsuario
+            })
+        })
+            .then(function (resposta) {
+
+                if (resposta.ok) {
+                    alert("Viagem cadastrada com sucesso!");
+                    window.location.href = "minhas-viagens.html";
+                } else {
+                    alert("Erro ao cadastrar viagem!");
+                    console.log("Erro no cadastro:", resposta.status);
+                }
+
+            })
+            .catch(function (erro) {
+                console.log("Erro:", erro);
+                alert("Não foi possível conectar ao servidor!");
+            });
     }
 </script>
