@@ -1162,6 +1162,7 @@ body.minhas-viagens {
 
 /* Dashboard geral */
 .dashboard-geral {
+  width: 100%;
   margin-top: 35px;
 }
 
@@ -1169,6 +1170,7 @@ body.minhas-viagens {
 .kpis-viagens {
   display: flex;
   gap: 20px;
+  width: 100%;
 }
 
 /* Estilo geral das KPIs */
@@ -1229,17 +1231,18 @@ body.minhas-viagens {
 .graficos-viagens {
   display: flex;
   gap: 20px;
+  width: 100%;
   margin-top: 30px;
 }
 
 /* Card do gráfico */
 .card-grafico {
+  flex: 1;
+  min-width: 0;
   background-color: white;
   border: 1px solid #E8DDF5;
   border-radius: 16px;
   padding: 25px;
-  flex: 1;
-  min-width: 0;
 }
 
 /* Título do gráfico */
@@ -1436,6 +1439,14 @@ body.minhas-viagens {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+}
+
+/* Conteúdo principal da página Minhas Viagens */
+
+.minhas-viagens .conteudo-viagens {
+  flex: 1;
+  min-width: 0;
+  padding: 40px;
 }
 
 .area-nova-viagem {

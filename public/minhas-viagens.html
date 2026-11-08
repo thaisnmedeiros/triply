@@ -141,6 +141,9 @@
                     /* armazena a data da próxima viagem */
                     let proximaData = null;
 
+                    /* armazena a soma dos orçamentos  para a KPI4, de saldo disponivel*/
+                    let orcamentoTotal = 0;
+
                     /* percorre as viagens encontradas */
                     for (let i = 0; i < viagens.length; i++) {
 
@@ -160,6 +163,9 @@
                         nomesViagens.push(viagens[i].titulo);
                         orcamentos.push(Number(viagens[i].orcamento));
 
+                        /* soma os orçamentos das viagens */
+                        orcamentoTotal += Number(viagens[i].orcamento);
+
                         lista_viagens.innerHTML += `
                             <div class="card-viagem">
                                 <h3>${viagens[i].titulo}</h3>
@@ -169,6 +175,9 @@
                             </div>
                         `;
                     }
+
+                    /* guarda o orçamento total para calcular o saldo KPI 4*/
+                    sessionStorage.ORCAMENTO_TOTAL = orcamentoTotal;
 
                     /* gráfico de orçamento por viagem */
                     new Chart("grafico_gastos", {
@@ -292,9 +301,40 @@
                     console.log("Erro ao carregar preparativos:", erro);
                 });
         }
-        carregarViagens();
 
+        // função para carregar a KPI 4 da dashboard, de "saldo disponivel"
+        function carregarGastos() {
+
+            let idUsuario = sessionStorage.ID_USUARIO;
+
+            fetch(`/despesas/gastos/${idUsuario}`)
+                .then(function (resposta) {
+                    return resposta.json();
+                })
+                .then(function (despesas) {
+
+                    let totalGasto = 0;
+
+                    /* soma as despesas realizadas */
+                    for (let i = 0; i < despesas.length; i++) {
+                        totalGasto += Number(despesas[i].totalGasto);
+                    }
+
+                    /* recupera o orçamento e calcula o saldo */
+                    let orcamentoTotal = Number(sessionStorage.ORCAMENTO_TOTAL);
+                    let saldo = orcamentoTotal - totalGasto;
+
+                    /* atualiza a KPI */
+                    saldo_disponivel.innerHTML = "R$ " + saldo.toFixed(2);
+
+                })
+                .catch(function (erro) {
+                    console.log("Erro ao carregar gastos:", erro);
+                });
+        }
+        carregarViagens();
         carregarPreparativos();
+        carregarGastos();
 
     </script>
 
