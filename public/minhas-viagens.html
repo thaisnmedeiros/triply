@@ -14,6 +14,9 @@
     <link rel="stylesheet" href="./css/login.css">
     <link rel="icon" type="image/png" href="assets/imgs/triply-icon.png">
     <link rel="preconnect" href="https://fonts.gstatic.com">
+
+    <!-- Carrega a biblioteca do Chart.js pra fazer os gráficos da dashboard-->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body class="minhas-viagens">
@@ -49,6 +52,61 @@
                 </a>
             </div>
 
+            <!-- Dashboard geral -->
+            <div class="dashboard-geral">
+
+                <!-- Indicadores -->
+                <div class="kpis-viagens">
+
+                    <div class="kpi-viagem kpi-roxa">
+                        <p>✈️ Viagens cadastradas</p>
+                        <h2 id="total_viagens">0</h2>
+                        <span>Total de viagens cadastradas</span>
+                    </div>
+
+                    <div class="kpi-viagem kpi-rosa">
+                        <p>📅 Próxima viagem</p>
+                        <h2 id="proxima_viagem">-- dias</h2>
+                        <span>Até a próxima viagem</span>
+                    </div>
+
+                    <div class="kpi-viagem kpi-azul">
+                        <p>📋 Preparativos concluídos</p>
+                        <h2 id="preparativos_concluidos">--%</h2>
+                        <span>Progresso dos preparativos</span>
+                    </div>
+
+                    <div class="kpi-viagem kpi-verde">
+                        <p>💰 Saldo disponível</p>
+                        <h2 id="saldo_disponivel">R$ --</h2>
+                        <span>Saldo total previsto</span>
+                    </div>
+
+                </div>
+
+                <!-- Gráficos da dashboard -->
+                <div class="graficos-viagens">
+
+                    <div class="card-grafico">
+                        <h3>Comparativo de gastos entre viagens</h3>
+                        <p>Orçamento previsto e despesas de cada viagem</p>
+
+                        <canvas id="grafico_gastos"></canvas>
+                    </div>
+
+                    <!-- Gráfico de preparativos -->
+                    <!-- Progresso = (Tarefas concluídas / Total de tarefas) * 100-->
+                    <div class="card-grafico">
+                        <h3>Progresso dos preparativos</h3>
+                        <p>Acompanhe a conclusão dos preparativos de cada viagem.</p>
+
+                        <canvas id="grafico_preparativos"></canvas>
+                    </div>
+
+                </div>
+
+            </div>
+
             <!-- Viagens cadastradas -->
             <div class="lista-viagens" id="lista_viagens">
             </div>
@@ -70,8 +128,37 @@
                 })
                 .then(function (viagens) {
 
+                    /* vetores que armazenam os dados do gráfico */
+                    let nomesViagens = [];
+                    let orcamentos = [];
+
+                    /* atualiza a quantidade de viagens cadastradas ma KPI 1*/
+                    total_viagens.innerHTML = viagens.length;
+
+                    /* identifica a data de hoje */
+                    let hoje = new Date();
+
+                    /* armazena a data da próxima viagem */
+                    let proximaData = null;
+
                     /* percorre as viagens encontradas */
                     for (let i = 0; i < viagens.length; i++) {
+
+                        /* recupera a data de início da viagem */
+                        let dataViagem = new Date(viagens[i].dataInicio);
+
+                        /* verifica se a viagem ainda vai acontecer */
+                        if (dataViagem >= hoje && viagens[i].status != "Cancelada") {
+
+                            /* identifica a viagem com a data mais próxima */
+                            if (proximaData == null || dataViagem < proximaData) {
+                                proximaData = dataViagem;
+                            }
+                        }
+
+                        /* armazena os dados de cada viagem para o gráfico */
+                        nomesViagens.push(viagens[i].titulo);
+                        orcamentos.push(Number(viagens[i].orcamento));
 
                         lista_viagens.innerHTML += `
                             <div class="card-viagem">
@@ -81,6 +168,48 @@
                                 <p>Orçamento: R$ ${viagens[i].orcamento}</p>
                             </div>
                         `;
+                    }
+
+                    /* gráfico de orçamento por viagem */
+                    new Chart("grafico_gastos", {
+                        type: "bar",
+
+                        data: {
+                            labels: nomesViagens,
+
+                            datasets: [{
+                                label: "Orçamento previsto",
+                                data: orcamentos,
+                                backgroundColor: "#820AD1",
+                                borderRadius: 8
+                            }]
+                        },
+
+                        options: {
+                            // coloca pra distribuir o espaço entre o grafico para todas as viagens
+                            responsive: true,
+                            plugins: {
+                                legend: {
+                                    display: true
+                                }
+                            },
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            }
+                        }
+                    });
+
+                    /* calcula os dias restantes para a próxima viagem */
+                    if (proximaData != null) {
+                        let diferenca = proximaData - hoje;
+                        // o ceil converte pra cima. Se a conversao der que faltam 2,5 dias para a viagem, ele converte pra 3
+                        // transforma a diferenca entre datas de milissegundos pra dias inteiros
+                        let dias = Math.ceil(diferenca / (1000 * 60 * 60 * 24));
+                        proxima_viagem.innerHTML = dias + " dias";
+                    } else {
+                        proxima_viagem.innerHTML = "Nenhuma";
                     }
 
                     if (viagens.length == 0) {
@@ -95,7 +224,77 @@
 
         }
 
+        function carregarPreparativos() {
+
+            let idUsuario = sessionStorage.ID_USUARIO;
+
+            fetch(`/checklist/progresso/${idUsuario}`)
+                .then(function (resposta) {
+                    return resposta.json();
+                })
+                .then(function (preparativos) {
+
+                    let nomesViagens = [];
+                    let progressos = [];
+                    /* Para a terceira KPI de preparativos concluidos */
+                    let totalTarefas = 0;
+                    let totalConcluidas = 0;
+
+                    for (let i = 0; i < preparativos.length; i++) {
+
+                        let total = preparativos[i].totalTarefas;
+                        let concluidas = preparativos[i].tarefasConcluidas;
+
+                        let percentual = (concluidas / total) * 100;
+
+                        /* soma as tarefas para calcular o progresso geral para a terceira KPI */
+                        totalTarefas += Number(total);
+                        totalConcluidas += Number(concluidas);
+
+                        nomesViagens.push("Viagem " + preparativos[i].fkViagem);
+                        progressos.push(percentual);
+                    }
+
+                    /* calcula o percentual geral dos preparativos (KPI 3)*/
+                    if (totalTarefas > 0) {
+                        let percentualGeral = (totalConcluidas / totalTarefas) * 100;
+                        preparativos_concluidos.innerHTML = percentualGeral.toFixed(0) + "%";
+                    } else {
+                        preparativos_concluidos.innerHTML = "--%";
+                    }
+
+                    new Chart("grafico_preparativos", {
+                        type: "bar",
+
+                        data: {
+                            labels: nomesViagens,
+                            datasets: [{
+                                label: "Preparativos concluídos (%)",
+                                data: progressos,
+                                backgroundColor: "#D6298E",
+                                borderRadius: 8
+                            }]
+                        },
+
+                        options: {
+                            responsive: true,
+                            scales: {
+                                y: {
+                                    beginAtZero: true,
+                                    max: 100
+                                }
+                            }
+                        }
+                    });
+
+                })
+                .catch(function (erro) {
+                    console.log("Erro ao carregar preparativos:", erro);
+                });
+        }
         carregarViagens();
+
+        carregarPreparativos();
 
     </script>
 
