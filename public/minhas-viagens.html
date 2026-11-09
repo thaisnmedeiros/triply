@@ -206,8 +206,9 @@
                     /* guarda o orçamento total para calcular o saldo da KPI 4 */
                     sessionStorage.ORCAMENTO_TOTAL = orcamentoTotal;
 
-                    /* consulta os gastos depois de receber os dados das viagens */
+                    /* consulta os gastos e preparativos depois de receber os dados das viagens */
                     carregarGastos();
+                    carregarPreparativos();
 
                 })
                 /* mostra os erros */
@@ -218,6 +219,9 @@
         function carregarPreparativos() {
 
             let idUsuario = sessionStorage.ID_USUARIO;
+            /* Recupera os nomes e IDs das viagens */
+            let nomes = JSON.parse(sessionStorage.NOMES_VIAGENS);
+            let ids = JSON.parse(sessionStorage.IDS_VIAGENS);
 
             fetch(`/checklist/progresso/${idUsuario}`)
                 .then(function (resposta) {
@@ -242,7 +246,13 @@
                         totalTarefas += Number(total);
                         totalConcluidas += Number(concluidas);
 
-                        nomesViagens.push("Viagem " + preparativos[i].fkViagem);
+                        /* Procura o nome da viagem pelo ID */
+                        for (let j = 0; j < ids.length; j++) {
+
+                            if (ids[j] == preparativos[i].fkViagem) {
+                                nomesViagens.push(nomes[j]);
+                            }
+                        }
                         progressos.push(percentual);
                     }
 
@@ -371,9 +381,8 @@
                     console.log("Erro ao carregar gastos:", erro);
                 });
         }
+        /* inicia o carregamento das informações da dashboard */
         carregarViagens();
-        carregarPreparativos();
-        carregarGastos();
 
     </script>
 
