@@ -131,8 +131,9 @@
                     /* vetores que armazenam os dados do gráfico */
                     let nomesViagens = [];
                     let orcamentos = [];
+                    let idsViagens = [];
 
-                    /* atualiza a quantidade de viagens cadastradas ma KPI 1*/
+                    /* atualiza a quantidade de viagens cadastradas na KPI 1 */
                     total_viagens.innerHTML = viagens.length;
 
                     /* identifica a data de hoje */
@@ -141,8 +142,10 @@
                     /* armazena a data da próxima viagem */
                     let proximaData = null;
 
-                    /* armazena a soma dos orçamentos  para a KPI4, de saldo disponivel*/
+                    /* armazena a soma dos orçamentos para a KPI 4 */
                     let orcamentoTotal = 0;
+
+                    lista_viagens.innerHTML = "";
 
                     /* percorre as viagens encontradas */
                     for (let i = 0; i < viagens.length; i++) {
@@ -162,61 +165,31 @@
                         /* armazena os dados de cada viagem para o gráfico */
                         nomesViagens.push(viagens[i].titulo);
                         orcamentos.push(Number(viagens[i].orcamento));
+                        idsViagens.push(viagens[i].idViagem);
 
                         /* soma os orçamentos das viagens */
                         orcamentoTotal += Number(viagens[i].orcamento);
 
                         lista_viagens.innerHTML += `
-                            <div class="card-viagem">
-                                <h3>${viagens[i].titulo}</h3>
-                                <p>Destino: ${viagens[i].destino}</p>
-                                <p>Status: ${viagens[i].status}</p>
-                                <p>Orçamento: R$ ${viagens[i].orcamento}</p>
-                            </div>
-                        `;
+                    <div class="card-viagem">
+                        <h3>${viagens[i].titulo}</h3>
+                        <p>Destino: ${viagens[i].destino}</p>
+                        <p>Status: ${viagens[i].status}</p>
+                        <p>Orçamento: R$ ${viagens[i].orcamento}</p>
+                    </div>
+                `;
                     }
-
-                    /* guarda o orçamento total para calcular o saldo KPI 4*/
-                    sessionStorage.ORCAMENTO_TOTAL = orcamentoTotal;
-
-                    /* gráfico de orçamento por viagem */
-                    new Chart("grafico_gastos", {
-                        type: "bar",
-
-                        data: {
-                            labels: nomesViagens,
-
-                            datasets: [{
-                                label: "Orçamento previsto",
-                                data: orcamentos,
-                                backgroundColor: "#820AD1",
-                                borderRadius: 8
-                            }]
-                        },
-
-                        options: {
-                            // coloca pra distribuir o espaço entre o grafico para todas as viagens
-                            responsive: true,
-                            plugins: {
-                                legend: {
-                                    display: true
-                                }
-                            },
-                            scales: {
-                                y: {
-                                    beginAtZero: true
-                                }
-                            }
-                        }
-                    });
 
                     /* calcula os dias restantes para a próxima viagem */
                     if (proximaData != null) {
+
                         let diferenca = proximaData - hoje;
-                        // o ceil converte pra cima. Se a conversao der que faltam 2,5 dias para a viagem, ele converte pra 3
-                        // transforma a diferenca entre datas de milissegundos pra dias inteiros
+
+                        /* transforma a diferença entre datas de milissegundos para dias */
                         let dias = Math.ceil(diferenca / (1000 * 60 * 60 * 24));
+
                         proxima_viagem.innerHTML = dias + " dias";
+
                     } else {
                         proxima_viagem.innerHTML = "Nenhuma";
                     }
@@ -225,14 +198,23 @@
                         lista_viagens.innerHTML = "<p>Você ainda não cadastrou nenhuma viagem.</p>";
                     }
 
+                    /* guarda os dados para utilizar no gráfico de gastos */
+                    sessionStorage.NOMES_VIAGENS = JSON.stringify(nomesViagens);
+                    sessionStorage.ORCAMENTOS = JSON.stringify(orcamentos);
+                    sessionStorage.IDS_VIAGENS = JSON.stringify(idsViagens);
+
+                    /* guarda o orçamento total para calcular o saldo da KPI 4 */
+                    sessionStorage.ORCAMENTO_TOTAL = orcamentoTotal;
+
+                    /* consulta os gastos depois de receber os dados das viagens */
+                    carregarGastos();
+
                 })
                 /* mostra os erros */
                 .catch(function (erro) {
                     console.log("Erro ao carregar viagens:", erro);
                 });
-
         }
-
         function carregarPreparativos() {
 
             let idUsuario = sessionStorage.ID_USUARIO;
@@ -303,10 +285,12 @@
         }
 
         // função para carregar a KPI 4 da dashboard, de "saldo disponivel"
+        // função para carregar a KPI 4 da dashboard, de "saldo disponivel"
         function carregarGastos() {
 
             let idUsuario = sessionStorage.ID_USUARIO;
 
+            // Solicita os gastos à API
             fetch(`/despesas/gastos/${idUsuario}`)
                 .then(function (resposta) {
                     return resposta.json();
@@ -326,6 +310,61 @@
 
                     /* atualiza a KPI */
                     saldo_disponivel.innerHTML = "R$ " + saldo.toFixed(2);
+
+                    /* recupera os dados das viagens */
+                    let nomesViagens = JSON.parse(sessionStorage.NOMES_VIAGENS);
+                    let orcamentos = JSON.parse(sessionStorage.ORCAMENTOS);
+                    let idsViagens = JSON.parse(sessionStorage.IDS_VIAGENS);
+
+                    /* guarda os gastos de cada viagem */
+                    let gastos = [];
+
+                    for (let i = 0; i < idsViagens.length; i++) {
+
+                        let gastoViagem = 0;
+
+                        for (let j = 0; j < despesas.length; j++) {
+
+                            if (idsViagens[i] == despesas[j].fkViagem) {
+                                gastoViagem = Number(despesas[j].totalGasto);
+                            }
+                        }
+
+                        gastos.push(gastoViagem);
+                    }
+
+                    /* gráfico comparativo de orçamento e despesas */
+                    new Chart("grafico_gastos", {
+                        type: "bar",
+
+                        data: {
+                            labels: nomesViagens,
+
+                            datasets: [
+                                {
+                                    label: "Orçamento previsto",
+                                    data: orcamentos,
+                                    backgroundColor: "#820AD1",
+                                    borderRadius: 8
+                                },
+                                {
+                                    label: "Despesas realizadas",
+                                    data: gastos,
+                                    backgroundColor: "#D6298E",
+                                    borderRadius: 8
+                                }
+                            ]
+                        },
+
+                        options: {
+                            responsive: true,
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            }
+                        }
+                    });
 
                 })
                 .catch(function (erro) {
