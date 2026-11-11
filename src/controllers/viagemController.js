@@ -6,6 +6,7 @@ var viagemModel = require("../models/viagemModel");
 function cadastrar(req, res) {
 
     let titulo = req.body.tituloServer;
+    let imagemCapa = req.body.imagemCapaServer;
     let descricao = req.body.descricaoServer;
     let destino = req.body.destinoServer;
     let pais = req.body.paisServer;
@@ -27,6 +28,8 @@ function cadastrar(req, res) {
         res.status(400).send("O orçamento não foi informado!");
     } else if (status == undefined) {
         res.status(400).send("O status não foi informado!");
+    } else if (imagemCapa == undefined || imagemCapa == "") {
+        res.status(400).send("A imagem da viagem não foi selecionada!");
     } else if (fkUsuario == undefined) {
         res.status(400).send("O usuário não foi identificado!");
     } else {

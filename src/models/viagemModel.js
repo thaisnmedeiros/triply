@@ -1,16 +1,17 @@
 /* conecta com o banco de dados */
 var database = require("../database/config");
 
-function cadastrar(titulo, descricao, destino, pais, dataInicio, dataFim, orcamento, status, fkUsuario) {
+function cadastrar(titulo, imagemCapa, descricao, destino, pais, dataInicio, dataFim, orcamento, status, fkUsuario) {
 
     var instrucaoSql = `
         INSERT INTO viagem
-        (titulo, descricao, destino, pais, dataInicio, dataFim, orcamento, status, fkUsuario)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);
+        (titulo, imagemCapa, descricao, destino, pais, dataInicio, dataFim, orcamento, status, fkUsuario)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
     `;
 
     var valores = [
         titulo,
+        imagemCapa,
         descricao,
         destino,
         pais,
