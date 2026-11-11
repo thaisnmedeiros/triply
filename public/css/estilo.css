@@ -1370,6 +1370,88 @@ body.minhas-viagens {
   min-width: 0;
 }
 
+/* Área principal da página Adicionar Viagem */
+.pagina-nova-viagem .area-nova-viagem {
+  display: flex;
+  /*coloca pra o card de selecionar imagem ficar do mesmo tamanho/altura do formulario do lado */
+  align-items: stretch;
+  gap: 25px;
+}
+
+/* Área de seleção das imagens */
+.pagina-nova-viagem .imagens-viagem {
+  width: 35%;
+  background-color: white;
+  padding: 25px;
+  border-radius: 18px;
+  border: 1px solid #EAE4F0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Título da seleção de imagens */
+.imagens-viagem h3 {
+  color: #820AD1;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+/* Descrição */
+.imagens-viagem p {
+  color: #625A75;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+/* Galeria de imagens */
+.opcoes-imagens {
+  display: flex;
+  /* coloca pra passar para a próxima linha quando não houver espaço suficiente */
+  flex-wrap: wrap;
+  gap: 12px;
+  align-content: flex-start;
+  padding-right: 8px;
+  /* Limita a altura da galeria */
+  height: 550px;
+  /* Permite rolar as imagens dentro da galeria */
+  overflow-y: auto;
+}
+
+/* Esconde o círculo do radio */
+.opcoes-imagens input {
+  display: none;
+}
+
+/* Imagem selecionada fica com a borda roxa */
+.opcoes-imagens input:checked+img {
+  border: 3px solid #820AD1;
+}
+
+/* Destaque ao passar o mouse */
+.opcoes-imagens img:hover {
+  border-color: #D8B4F0;
+}
+
+/* Cada opção de imagem */
+.opcoes-imagens label {
+  width: 47%;
+  cursor: pointer;
+}
+
+/* Fotografias */
+.opcoes-imagens img {
+  width: 100%;
+  height: 110px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 3px solid transparent;
+}
+
+/* Formulário de cadastro */
+.pagina-nova-viagem .card-nova-viagem {
+  width: 65%;
+}
+
 .conteudo-viagens h6 {
   color: #7142B7;
   font-size: 13px;
@@ -1646,6 +1728,15 @@ body.minhas-viagens {
   background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
 }
 
+/* Título e informações do banner */
+.informacoes-banner h1 {
+  color: white;
+}
+
+.detalhes-banner p {
+  color: white;
+}
+
 .informacoes-banner h1 {
   font-size: 36px;
   margin: 12px 0;
@@ -1654,6 +1745,20 @@ body.minhas-viagens {
 .detalhes-banner {
   display: flex;
   gap: 25px;
+}
+
+.cabecalho-card button {
+  /* isso faz com que o botao nao que quebre em duas linhas o nome no botao */
+  white-space: nowrap;
+}
+
+/* Status da viagem */
+#status_viagem {
+  background-color: #820AD1;
+  color: white;
+  padding: 8px 14px;
+  border-radius: 20px;
+  font-size: 13px;
 }
 
 /* Indicadores da viagem */
@@ -1666,14 +1771,14 @@ body.minhas-viagens {
 .kpi-individual {
   flex: 1;
   min-width: 0;
-  padding: 20px;
+  padding: 18px;
   border-radius: 16px;
   border: 1px solid;
 }
 
 .kpi-individual p {
   font-size: 14px;
-  margin-bottom: 20px;
+  margin-bottom: 12px;
 }
 
 .kpi-individual h2 {
@@ -1721,7 +1826,7 @@ body.minhas-viagens {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 250px;
+  height: 200px;
 }
 
 /* Informações abaixo do gráfico */

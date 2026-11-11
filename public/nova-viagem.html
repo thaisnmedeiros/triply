@@ -46,12 +46,14 @@
             </div>
 
             <div class="area-nova-viagem">
-                <div class="imagem-nova-viagem">
-                    <img src="./assets/imgs/santorini.jpg" alt="Paisagem de viagem">
+                <!-- Eo usuario seleciona a imagem da viagem -->
+                <div class="imagens-viagem">
+                    <h3>Escolha uma imagem para sua viagem</h3>
+                    <p>Selecione a fotografia que mais combina com sua viagem.</p>
+                    <div class="opcoes-imagens" id="opcoes_imagens"></div>
                 </div>
 
                 <div class="card-nova-viagem">
-
                     <h2>Dados da viagem</h2>
                     <p>Preencha as informações básicas da sua viagem.</p>
 
@@ -128,6 +130,51 @@
 
 <script>
 
+    let imagens = [
+        "praia1.jpg",
+        "praia2.jpg",
+        "praia3.jpg",
+        "praia4.jpg",
+        "neve1.jpg",
+        "neve2.jpg",
+        "neve3.jpg",
+        "neve4.jpg",
+        "natureza1.jpg",
+        "natureza2.jpg",
+        "natureza3.jpg",
+        "natureza4.jpg",
+        "cidade1.jpg",
+        "cidade2.jpg",
+        "cidade3.jpg",
+        "cidade4.jpg",
+        "familia1.jpg",
+        "familia2.jpg",
+        "familia3.jpg",
+        "familia4.jpg"
+    ];
+
+    // vai armazenar qual o nome da foto escolhida e se mudar, só trocar o valor
+    let imagemCapa = "";
+    //criei a função que vai receber o parâmetro "imagem", que vai receber o nome da imagem selecionada
+    //a imagemCapa vira o nome da imagem, entao imagemCapa = imagem = "familia3, por ex"
+    function selecionarImagem(imagem) {
+        imagemCapa = imagem;
+    }
+
+    //pra nao criar 20 tags imgs eu pensei em criar um vetor pra percorrer ate achar a imagem selecionada e de acordo com isso vai retornar o nome
+    for (let i = 0; i < imagens.length; i++) {
+        opcoes_imagens.innerHTML += `
+            <label>
+                <input type="radio"
+                    name="imagemCapa"
+                    value="${imagens[i]}"
+                    onclick="selecionarImagem('${imagens[i]}')">
+
+                <img src="./assets/imgs/viagens/${imagens[i]}"
+                    alt="Imagem de viagem">
+            </label>`;
+    }
+
     function cadastrarViagem() {
 
         let nome = ipt_nome_viagem.value;
@@ -151,6 +198,11 @@
         ];
 
         let erros = [];
+
+        if (imagemCapa == "") {
+            alert("Selecione uma imagem para sua viagem!");
+            return;
+        }
 
         // Verifica os campos obrigatórios
         for (let i = 0; i < campos.length; i++) {
@@ -201,6 +253,7 @@
                 dataFimServer: dataTermino,
                 orcamentoServer: Number(orcamento),
                 statusServer: status,
+                imagemCapaServer: imagemCapa,
                 fkUsuarioServer: fkUsuario
             })
         })
