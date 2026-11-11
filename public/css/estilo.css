@@ -1601,3 +1601,322 @@ body.minhas-viagens {
   font-size: 12px;
   height: 16px;
 }
+
+/* Página Minha Viagem */
+.minha-viagem .conteudo-viagens {
+  flex: 1;
+  min-width: 0;
+  padding: 35px;
+}
+
+/* Link para voltar */
+.cabecalho-minha-viagem {
+  margin-bottom: 20px;
+}
+
+.cabecalho-minha-viagem a {
+  color: #820AD1;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+/* Banner da viagem */
+.banner-minha-viagem {
+  position: relative;
+  height: 240px;
+  border-radius: 20px;
+  overflow: hidden;
+  background-color: #1D142B;
+}
+
+.banner-minha-viagem img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Informações sobre a imagem */
+.informacoes-banner {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 25px;
+  color: white;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+}
+
+.informacoes-banner h1 {
+  font-size: 36px;
+  margin: 12px 0;
+}
+
+.detalhes-banner {
+  display: flex;
+  gap: 25px;
+}
+
+/* Indicadores da viagem */
+.kpis-minha-viagem {
+  display: flex;
+  gap: 20px;
+  margin-top: 25px;
+}
+
+.kpi-individual {
+  flex: 1;
+  min-width: 0;
+  padding: 20px;
+  border-radius: 16px;
+  border: 1px solid;
+}
+
+.kpi-individual p {
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.kpi-individual h2 {
+  font-size: 30px;
+}
+
+/* Ícones de informação das KPIs */
+.kpi-individual p span {
+  cursor: help;
+  margin-left: 5px;
+  font-size: 14px;
+}
+
+/* Linhas da dashboard individual */
+.linha-minha-viagem {
+  display: flex;
+  gap: 20px;
+  margin-top: 25px;
+}
+
+/* Cards da dashboard individual */
+.card-minha-viagem {
+  flex: 1;
+  min-width: 0;
+  padding: 25px;
+  background-color: white;
+  border: 1px solid #EAE4F0;
+  border-radius: 16px;
+}
+
+.card-minha-viagem h2 {
+  color: #1D142B;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.card-minha-viagem p {
+  color: #625A75;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+/* Gráfico de orçamento */
+.area-grafico-orcamento {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 250px;
+}
+
+/* Informações abaixo do gráfico */
+.progresso-orcamento {
+  margin-top: 20px;
+}
+
+.progresso-orcamento p {
+  margin-bottom: 10px;
+}
+
+/* Barra de progresso do orçamento */
+/* tá com o # porque ta referenciando um ID e nao uma classe*/
+#barra_orcamento {
+  width: 100%;
+  height: 12px;
+  /* accent faz com que a parte da barra que ficar preenchida vai ficar roxa*/
+  accent-color: #820AD1;
+}
+
+/* Área do checklist */
+.area-checklist h3 {
+  font-size: 15px;
+  color: #820AD1;
+  margin-bottom: 10px;
+}
+
+/* Barra do checklist */
+#barra_checklist {
+  width: 100%;
+  height: 12px;
+  /* accent faz com que a parte da barra que ficar preenchida vai ficar roxa*/
+  accent-color: #820AD1;
+}
+
+/* Lista de tarefas */
+.lista-checklist {
+  margin-top: 25px;
+}
+
+/* Cada tarefa */
+.item-checklist {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid #EAE4F0;
+}
+
+.item-checklist input {
+  /* quando for clicado o chacklist, vai ficar roxo*/
+  accent-color: #820AD1;
+}
+
+.item-checklist span {
+  color: #1D142B;
+  font-size: 14px;
+}
+
+/* Adicionar nova tarefa */
+.adicionar-tarefa {
+  display: flex;
+  gap: 10px;
+  margin-top: 25px;
+}
+
+.adicionar-tarefa input {
+  flex: 1;
+  min-width: 0;
+  padding: 12px;
+  border: 1px solid #EAE4F0;
+  border-radius: 8px;
+}
+
+/* Cabeçalho do card de despesas */
+.cabecalho-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+/* Botões da dashboard individual */
+.card-minha-viagem button {
+  background-color: #820AD1;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 15px;
+  cursor: pointer;
+}
+
+.card-minha-viagem button:hover {
+  background-color: #6908A8;
+}
+
+/* Formulário de despesas */
+.formulario-despesa {
+  display: none;
+  margin-bottom: 25px;
+}
+
+.formulario-despesa input,
+.formulario-despesa select {
+  padding: 12px;
+  border: 1px solid #EAE4F0;
+  border-radius: 8px;
+  margin: 5px;
+}
+
+/* Tabela de despesas */
+.tabela-despesas {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tabela-despesas th,
+.tabela-despesas td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #EAE4F0;
+  font-size: 13px;
+}
+
+.tabela-despesas th {
+  color: #625A75;
+  background-color: #F7F3FC;
+}
+
+.tabela-despesas td {
+  color: #1D142B;
+}
+
+/* Mensagem quando não existem despesas */
+.tabela-despesas td[colspan="5"] {
+  text-align: center;
+  color: #625A75;
+}
+
+/* Totais das despesas */
+.total-despesas {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 25px;
+  padding-top: 15px;
+}
+
+.total-despesas span {
+  font-size: 13px;
+  color: #625A75;
+}
+
+.total-despesas h3 {
+  color: #820AD1;
+  margin-top: 8px;
+}
+
+/* Lista de atividades do roteiro */
+.lista-roteiro {
+  margin-top: 25px;
+}
+
+/* Cada atividade */
+.item-roteiro {
+  padding: 15px;
+  margin-bottom: 12px;
+  background-color: #F7F3FC;
+  border-radius: 10px;
+  border-left: 4px solid #820AD1;
+}
+
+.item-roteiro h3 {
+  font-size: 13px;
+  color: #820AD1;
+  margin-bottom: 8px;
+}
+
+.item-roteiro p {
+  font-size: 14px;
+  color: #1D142B;
+  margin-bottom: 0;
+}
+
+/* Adicionar atividade */
+.adicionar-roteiro {
+  display: flex;
+  gap: 10px;
+  margin-top: 25px;
+}
+
+.adicionar-roteiro input {
+  flex: 1;
+  min-width: 0;
+  padding: 12px;
+  border: 1px solid #EAE4F0;
+  border-radius: 8px;
+}

@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+
+<html lang="pt-br">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Triply | Minha Viagem</title>
+
+    <script src="./js/sessao.js"></script>
+
+    <link rel="stylesheet" href="./css/estilo.css">
+    <link rel="icon" type="image/png" href="./assets/imgs/triply-icon.png">
+    <!-- Biblioteca para criar o gráfico -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+
+<body class="minha-viagem">
+    <div class="pagina-viagens">
+
+        <!-- Menu lateral esquerdo -->
+        <div class="menu-lateral">
+            <div class="menu">
+                <a href="index.html" class="logo">
+                    <img src="./assets/imgs/logo.png" alt="Triply">
+                </a>
+
+                <a href="minhas-viagens.html" class="ativo"> Minhas viagens</a>
+                <a href="nova-viagem.html">Adicionar viagem</a>
+
+            </div>
+
+            <a href="#" onclick="limparSessao()" class="sair-menu">Sair</a>
+
+        </div>
+
+        <!-- Conteúdo principal da página-->
+        <div class="conteudo-viagens">
+
+            <div class="cabecalho-minha-viagem">
+                <a href="minhas-viagens.html">← Voltar para Minhas Viagens</a>
+            </div>
+
+            <!-- Banner da viagem -->
+            <div class="banner-minha-viagem">
+
+                <!-- Imagem selecionada no cadastro -->
+                <img id="imagem_viagem" src="./assets/imgs/viagens/praia.jpg" alt="Imagem da viagem">
+                <div class="informacoes-banner">
+                    <span id="status_viagem">Em planejamento</span>
+                    <h1 id="nome_viagem">Maceió</h1>
+
+                    <div class="detalhes-banner">
+                        <p id="destino_viagem">📍 Maceió, Brasil</p>
+                        <p id="datas_viagem">📅 10 a 17 de julho de 2027</p>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Indicadores da viagem -->
+            <div class="kpis-minha-viagem">
+
+                <!-- KPI 1 - Orçamento total -->
+                <div class="kpi-individual kpi-roxa">
+                    <p>
+                        💼 Orçamento total
+                        <span title="Valor do orçamento informado no cadastro da viagem.">ⓘ</span>
+                    </p>
+                    <h2 id="orcamento_viagem">R$ --</h2>
+                </div>
+
+                <!-- KPI 2 - Despesas previstas -->
+                <div class="kpi-individual kpi-rosa">
+                    <p>
+                        💗 Despesas previstas
+                        <!-- Tooltips (aprendido na aula de dashboard)-->
+                        <span
+                            title="Soma dos valores previstos de todas as despesas cadastradas para esta viagem.">ⓘ</span>
+                    </p>
+                    <h2 id="despesas_previstas">R$ --</h2>
+                </div>
+
+                <!-- KPI 3 - Saldo previsto -->
+                <div class="kpi-individual kpi-verde">
+                    <p>
+                        💰 Saldo previsto
+                        <!-- Tooltips (aprendido na aula de dashboard)-->
+                        <span title="Orçamento total menos a soma das despesas previstas.">ⓘ</span>
+                    </p>
+                    <h2 id="saldo_viagem">R$ --</h2>
+                </div>
+
+                <!-- KPI 4 - Dias restantes -->
+                <div class="kpi-individual kpi-azul">
+                    <p>
+                        ✈️ Dias restantes
+                        <span title="Quantidade de dias entre a data atual e o início da viagem.">ⓘ</span>
+                    </p>
+                    <h2 id="dias_restantes">-- dias</h2>
+                </div>
+            </div>
+
+            <!-- Primeira linha: orçamento e checklist -->
+            <div class="linha-minha-viagem">
+
+                <!-- Gráfico de orçamento -->
+                <div class="card-minha-viagem">
+                    <h2>
+                        Meu orçamento
+                        <span title="Distribuição das despesas previstas por categoria.">ⓘ</span>
+                    </h2>
+                    <p>Acompanhe os gastos planejados para sua viagem.</p>
+
+                    <!-- Gráfico de despesas por categoria -->
+                    <div class="area-grafico-orcamento">
+                        <canvas id="grafico_orcamento"></canvas>
+                    </div>
+
+                    <!-- Progresso do orçamento 
+                        Cálculo: let percentual = (despesasPrevistas / orcamentoTotal) * 100;-->
+                    <div class="progresso-orcamento">
+                        <p id="percentual_orcamento">
+                            --% do orçamento comprometido
+                        </p>
+                        <progress id="barra_orcamento" value="0" max="100"></progress>
+                    </div>
+
+                </div>
+
+                <!-- Checklist -->
+                <div class="card-minha-viagem">
+                    <h2>Checklist da viagem</h2>
+                    <p>Organize tudo o que precisa fazer antes de embarcar.</p>
+                    <div class="area-checklist">
+
+                        <!-- Resumo dos preparativos -->
+                        <h3 id="resumo_checklist">
+                            Nenhuma tarefa cadastrada
+                        </h3>
+
+                        <!-- Barra de progresso -->
+                        <progress id="barra_checklist" value="0" max="100"></progress>
+
+                        <!-- Tarefas cadastradas -->
+                        <div class="lista-checklist" id="lista_checklist">
+                            <p>Você ainda não cadastrou nenhuma tarefa.</p>
+                        </div>
+
+                        <!-- Cadastrar uma nova tarefa -->
+                        <div class="adicionar-tarefa">
+                            <input type="text" id="ipt_tarefa" placeholder="Digite uma nova tarefa">
+                            <button onclick="adicionarTarefa()">
+                                + Adicionar tarefa
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Segunda linha: despesas e roteiro -->
+            <div class="linha-minha-viagem">
+
+                <!-- Despesas -->
+                <div class="card-minha-viagem">
+
+                    <div class="cabecalho-card">
+                        <div>
+                            <h2>Minhas despesas</h2>
+                            <p>Confira os gastos planejados e realizados para esta viagem.</p>
+                        </div>
+
+                        <button onclick="mostrarFormularioDespesa()">
+                            + Adicionar despesa
+                        </button>
+                    </div>
+
+                    <!-- Formulário para nova despesa -->
+                    <div class="formulario-despesa" id="formulario_despesa">
+
+                        <!-- Descrição -->
+                        <input type="text" id="ipt_descricao_despesa" placeholder="Descrição da despesa">
+
+                        <!-- Categoria -->
+                        <select id="ipt_categoria_despesa">
+                            <option value="">Selecione a categoria</option>
+                            <option value="Hospedagem">Hospedagem</option>
+                            <option value="Transporte">Transporte</option>
+                            <option value="Alimentação">Alimentação</option>
+                            <option value="Passeios">Passeios</option>
+                            <option value="Outros">Outros</option>
+                        </select>
+
+                        <!-- Valor previsto -->
+                        <input type="number" id="ipt_valor_previsto" placeholder="Valor previsto (R$)">
+
+                        <!-- Valor realizado -->
+                        <input type="number" id="ipt_valor_realizado" placeholder="Valor realizado (R$)">
+
+                        <!-- Status -->
+                        <select id="ipt_status_despesa">
+                            <option value="Prevista">Prevista</option>
+                            <option value="Paga">Paga</option>
+                        </select>
+
+                        <button onclick="adicionarDespesa()">
+                            Salvar despesa
+                        </button>
+                    </div>
+
+                    <!-- Tabela de despesas -->
+                    <table class="tabela-despesas">
+                        <thead>
+                            <!-- table row - cria uma linha-->
+                            <tr>
+                                <!-- table header - cria uma célula do cabeçalho da coluna-->
+                                <th>Descrição</th>
+                                <th>Categoria</th>
+                                <th>Valor previsto</th>
+                                <th>Valor realizado</th>
+                                <th>Status</th>
+                            </tr>
+
+                        </thead>
+
+                        <!-- Despesas recebidas do banco -->
+                        <tbody id="lista_despesas">
+                            <tr>
+                                <!-- table data - adiciona uma informação em uma célula da coluna
+                                    CAso o usuario nao tenha colocado nada na tabela, aí o fala pra essa mensagem ocupa as 5 colunas da tabela-->
+                                <td colspan="5">Nenhuma despesa cadastrada.</td>
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+
+                    <!-- Resumo das despesas -->
+                    <div class="total-despesas">
+                        <div>
+                            <span>Total previsto</span>
+                            <h3 id="total_previsto">R$ --</h3>
+                        </div>
+
+                        <div>
+                            <span>Total realizado</span>
+                            <h3 id="total_realizado">R$ --</h3>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- Roteiro da viagem -->
+                <div class="card-minha-viagem">
+                    <h2>Roteiro da viagem</h2>
+                    <p>Planeje e acompanhe as experiências do seu destino.</p>
+
+                    <!-- Experiências cadastradas -->
+                    <div class="lista-roteiro" id="lista_roteiro">
+                        <p>Você ainda não cadastrou nenhuma atividade.</p>
+                    </div>
+
+                    <!-- Adicionar atividade ao roteiro -->
+                    <div class="adicionar-roteiro">
+                        <input type="text" id="ipt_atividade" placeholder="Nome da atividade">
+                        <input type="date" id="ipt_data_atividade">
+                        <button onclick="adicionarAtividade()">
+                            + Adicionar atividade
+                        </button>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>
