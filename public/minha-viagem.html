@@ -49,7 +49,7 @@
             <div class="banner-minha-viagem">
 
                 <!-- Imagem selecionada no cadastro -->
-                <img id="imagem_viagem" src="./assets/imgs/viagens/praia.jpg" alt="Imagem da viagem">
+                <img id="imagem_viagem" alt="Imagem da viagem">
                 <div class="informacoes-banner">
                     <span id="status_viagem">Em planejamento</span>
                     <h1 id="nome_viagem">Maceió</h1>
@@ -286,3 +286,47 @@
 </body>
 
 </html>
+
+<script>
+
+    function carregarMinhaViagem() {
+
+        let idViagem = sessionStorage.ID_VIAGEM;
+        let fkUsuario = sessionStorage.ID_USUARIO;
+
+        if (idViagem == undefined || fkUsuario == undefined) {
+            window.location.href = "minhas-viagens.html";
+            return;
+        }
+
+        fetch(`/viagens/listar/${fkUsuario}`)
+            .then(function (resposta) {
+                return resposta.json();
+            })
+            .then(function (viagens) {
+
+                for (let i = 0; i < viagens.length; i++) {
+
+                    if (viagens[i].idViagem == idViagem) {
+
+                        let viagem = viagens[i];
+
+                        console.log("Viagem selecionada:", viagem);
+
+                        // Aqui vamos preencher o banner e as KPIs.
+
+                        return;
+                    }
+                }
+
+                alert("Viagem não encontrada!");
+                window.location.href = "minhas-viagens.html";
+
+            })
+            .catch(function (erro) {
+                console.log("Erro ao carregar viagem:", erro);
+            });
+    }
+
+    carregarMinhaViagem();
+</script>

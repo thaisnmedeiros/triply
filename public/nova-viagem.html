@@ -258,10 +258,15 @@
             })
         })
             .then(function (resposta) {
-
+                //fluxo: usuário cadastra viagem nova → MySQL gera ID 3 → JavaScript guarda ID 3 → abre Minha Viagem da viagem criada.
                 if (resposta.ok) {
-                    alert("Viagem cadastrada com sucesso!");
-                    window.location.href = "minhas-viagens.html";
+                    //ve se a API conseguiu cadastrar a viagem com sucesso
+                    return resposta.json().then(function (resultado) {
+                        //insertId é a informação retornada pelo MySQL que indica o ID do registro criado, pra o site saber qual pagina de viagem individual abrir
+                        sessionStorage.ID_VIAGEM = resultado.insertId;
+                        alert("Viagem cadastrada com sucesso!");
+                        window.location.href = "minha-viagem.html";
+                    });
                 } else {
                     alert("Erro ao cadastrar viagem!");
                     console.log("Erro no cadastro:", resposta.status);

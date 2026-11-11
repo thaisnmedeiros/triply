@@ -36,6 +36,7 @@ function cadastrar(req, res) {
 
         viagemModel.cadastrar(
             titulo,
+            imagemCapa,
             descricao,
             destino,
             pais,
