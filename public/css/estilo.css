@@ -1826,7 +1826,9 @@ body.minhas-viagens {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 200px;
+  width: 100%;
+  height: 280px;
+  margin: 24px 0;
 }
 
 /* Informações abaixo do gráfico */
@@ -1842,9 +1844,22 @@ body.minhas-viagens {
 /* tá com o # porque ta referenciando um ID e nao uma classe*/
 #barra_orcamento {
   width: 100%;
-  height: 12px;
-  /* accent faz com que a parte da barra que ficar preenchida vai ficar roxa*/
-  accent-color: #820AD1;
+  height: 18px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+/* esse ::-webkit-progress-bar permite personalizar fundo e preenchimento de algum elemento*/
+/* Cor de fundo da barra de progresso de gastos. Essa area representa a barra completa, 100%*/
+#barra_orcamento::-webkit-progress-bar {
+  background-color: #F0EAF5;
+  border-radius: 10px;
+}
+
+/* Cor da parte preenchida da barra de progresso de gastos, representa a area que vai ocupar o orçamento comprometido*/
+#barra_orcamento::-webkit-progress-value {
+  background-color: #820AD1;
+  border-radius: 10px;
 }
 
 /* Área do checklist */
@@ -1926,8 +1941,16 @@ body.minhas-viagens {
 
 /* Formulário de despesas */
 .formulario-despesa {
-  display: none;
-  margin-bottom: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  padding: 24px;
+  margin: 24px 0;
+  background-color: #F7F0FC;
+  border-radius: 14px;
+  /*pra nao ultrapassar a largura do card do formulario de despesa */
+  box-sizing: border-box;
 }
 
 .formulario-despesa input,
@@ -1936,6 +1959,29 @@ body.minhas-viagens {
   border: 1px solid #EAE4F0;
   border-radius: 8px;
   margin: 5px;
+  flex: 1;
+  min-width: 0;
+}
+
+/* Alinha o botão à direita */
+.botao-salvar-despesa {
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* Organiza os campos em linhas */
+.linha-campos-despesa {
+  display: flex;
+  gap: 16px;
+  width: 100%;
+}
+
+.linha-campos-despesa input,
+.linha-campos-despesa select {
+  flex: 1;
+  min-width: 0;
+  box-sizing: border-box;
+  text-align: left;
 }
 
 /* Tabela de despesas */
@@ -1973,6 +2019,17 @@ body.minhas-viagens {
   justify-content: space-between;
   margin-top: 25px;
   padding-top: 15px;
+  background-color: #F5E9FC;
+  padding: 20px 24px;
+  border-radius: 12px;
+}
+
+.tabela-despesas thead {
+  background-color: #F3E8FA;
+}
+
+.tabela-despesas tbody tr:hover {
+  background-color: #FAF6FD;
 }
 
 .total-despesas span {
@@ -1987,7 +2044,10 @@ body.minhas-viagens {
 
 /* Lista de atividades do roteiro */
 .lista-roteiro {
-  margin-top: 25px;
+  background-color: #F7F0FC;
+  padding: 24px;
+  border-radius: 12px;
+  margin: 24px 0;
 }
 
 /* Cada atividade */

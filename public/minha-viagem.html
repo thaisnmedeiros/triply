@@ -51,14 +51,13 @@
                 <!-- Imagem selecionada no cadastro -->
                 <img id="imagem_viagem" alt="Imagem da viagem">
                 <div class="informacoes-banner">
-                    <span id="status_viagem">Em planejamento</span>
-                    <h1 id="nome_viagem">Maceió</h1>
+                    <span id="status_viagem">--</span>
+                    <h1 id="nome_viagem">Carregando viagem...</h1>
 
                     <div class="detalhes-banner">
-                        <p id="destino_viagem">📍 Maceió, Brasil</p>
-                        <p id="datas_viagem">📅 10 a 17 de julho de 2027</p>
+                        <p id="destino_viagem">📍 --</p>
+                        <p id="datas_viagem">📅 --</p>
                     </div>
-
                 </div>
             </div>
 
@@ -119,6 +118,7 @@
                     <!-- Gráfico de despesas por categoria -->
                     <div class="area-grafico-orcamento">
                         <canvas id="grafico_orcamento"></canvas>
+                        <p id="mensagem_grafico"></p>
                     </div>
 
                     <!-- Progresso do orçamento 
@@ -174,75 +174,77 @@
                             <h2>Minhas despesas</h2>
                             <p>Confira os gastos planejados e realizados para esta viagem.</p>
                         </div>
-
-                        <button onclick="mostrarFormularioDespesa()">
-                            + Adicionar despesa
-                        </button>
                     </div>
 
                     <!-- Formulário para nova despesa -->
+                    <!-- Formulário para nova despesa -->
                     <div class="formulario-despesa" id="formulario_despesa">
 
-                        <!-- Descrição -->
-                        <input type="text" id="ipt_descricao_despesa" placeholder="Descrição da despesa">
+                        <!-- Primeira linha -->
+                        <div class="linha-campos-despesa">
 
-                        <!-- Categoria -->
-                        <select id="ipt_categoria_despesa">
-                            <option value="">Selecione a categoria</option>
-                            <option value="Hospedagem">Hospedagem</option>
-                            <option value="Transporte">Transporte</option>
-                            <option value="Alimentação">Alimentação</option>
-                            <option value="Passeios">Passeios</option>
-                            <option value="Outros">Outros</option>
-                        </select>
+                            <input type="text" id="ipt_descricao_despesa" placeholder="Descrição da despesa">
 
-                        <!-- Valor previsto -->
-                        <input type="number" id="ipt_valor_previsto" placeholder="Valor previsto (R$)">
+                            <select id="ipt_categoria_despesa">
+                                <option value="">Selecione a categoria</option>
+                                <option value="Hospedagem">Hospedagem</option>
+                                <option value="Transporte">Transporte</option>
+                                <option value="Alimentação">Alimentação</option>
+                                <option value="Passeios">Passeios</option>
+                                <option value="Outros">Outros</option>
+                            </select>
 
-                        <!-- Valor realizado -->
-                        <input type="number" id="ipt_valor_realizado" placeholder="Valor realizado (R$)">
+                        </div>
 
-                        <!-- Status -->
-                        <select id="ipt_status_despesa">
-                            <option value="Prevista">Prevista</option>
-                            <option value="Paga">Paga</option>
-                        </select>
+                        <!-- Segunda linha -->
+                        <div class="linha-campos-despesa">
 
-                        <button onclick="adicionarDespesa()">
-                            Salvar despesa
-                        </button>
+                            <input type="number" id="ipt_valor_previsto" placeholder="Valor previsto (R$)">
+
+                            <input type="number" id="ipt_valor_realizado" placeholder="Valor realizado (R$)">
+
+                            <select id="ipt_status_despesa">
+                                <option value="Prevista">Prevista</option>
+                                <option value="Paga">Paga</option>
+                            </select>
+
+                        </div>
+
+                        <div class="botao-salvar-despesa">
+                            <button onclick="adicionarDespesa()">
+                                Salvar despesa
+                            </button>
+                        </div>
+
                     </div>
 
                     <!-- Tabela de despesas -->
                     <table class="tabela-despesas">
+
                         <thead>
-                            <!-- table row - cria uma linha-->
+                            <!-- linhas da tabela-->
                             <tr>
-                                <!-- table header - cria uma célula do cabeçalho da coluna-->
+                                <!-- colunas da tabela-->
                                 <th>Descrição</th>
                                 <th>Categoria</th>
                                 <th>Valor previsto</th>
                                 <th>Valor realizado</th>
                                 <th>Status</th>
                             </tr>
-
                         </thead>
 
                         <!-- Despesas recebidas do banco -->
                         <tbody id="lista_despesas">
                             <tr>
-                                <!-- table data - adiciona uma informação em uma célula da coluna
-                                    CAso o usuario nao tenha colocado nada na tabela, aí o fala pra essa mensagem ocupa as 5 colunas da tabela-->
                                 <td colspan="5">Nenhuma despesa cadastrada.</td>
                             </tr>
-
                         </tbody>
 
                     </table>
 
-
                     <!-- Resumo das despesas -->
                     <div class="total-despesas">
+
                         <div>
                             <span>Total previsto</span>
                             <h3 id="total_previsto">R$ --</h3>
@@ -252,29 +254,29 @@
                             <span>Total realizado</span>
                             <h3 id="total_realizado">R$ --</h3>
                         </div>
+
                     </div>
                 </div>
+            </div>
 
 
-                <!-- Roteiro da viagem -->
-                <div class="card-minha-viagem">
-                    <h2>Roteiro da viagem</h2>
-                    <p>Planeje e acompanhe as experiências do seu destino.</p>
+            <!-- Roteiro da viagem -->
+            <div class="card-minha-viagem">
+                <h2>Roteiro da viagem</h2>
+                <p>Planeje e acompanhe as experiências do seu destino.</p>
 
-                    <!-- Experiências cadastradas -->
-                    <div class="lista-roteiro" id="lista_roteiro">
-                        <p>Você ainda não cadastrou nenhuma atividade.</p>
-                    </div>
+                <!-- Experiências cadastradas -->
+                <div class="lista-roteiro" id="lista_roteiro">
+                    <p>Você ainda não cadastrou nenhuma atividade.</p>
+                </div>
 
-                    <!-- Adicionar atividade ao roteiro -->
-                    <div class="adicionar-roteiro">
-                        <input type="text" id="ipt_atividade" placeholder="Nome da atividade">
-                        <input type="date" id="ipt_data_atividade">
-                        <button onclick="adicionarAtividade()">
-                            + Adicionar atividade
-                        </button>
-                    </div>
-
+                <!-- Adicionar atividade ao roteiro -->
+                <div class="adicionar-roteiro">
+                    <input type="text" id="ipt_atividade" placeholder="Nome da atividade">
+                    <input type="date" id="ipt_data_atividade">
+                    <button onclick="adicionarAtividade()">
+                        + Adicionar atividade
+                    </button>
                 </div>
 
             </div>
@@ -283,11 +285,232 @@
 
     </div>
 
+    </div>
+
 </body>
 
 </html>
 
 <script>
+
+    // Carrega as despesas cadastradas da viagem
+    function carregarDespesas() {
+
+        let idViagem = sessionStorage.ID_VIAGEM;
+
+        fetch(`/despesas/listar/${idViagem}`)
+            .then(function (resposta) {
+                return resposta.json();
+            })
+            .then(function (despesas) {
+                // Valores previstos por categoria pra o grafico pizza
+                let hospedagem = 0;
+                let transporte = 0;
+                let alimentacao = 0;
+                let passeios = 0;
+                let outros = 0;
+
+                // Limpa a tabela antes de adicionar os registros
+                lista_despesas.innerHTML = "";
+                //limpa a mensagem do grafico pizza antes de criar o grafico
+                mensagem_grafico.innerHTML = "";
+
+                // Se não houver despesas cadastradas. o colspan = 5 coloca pra mesclar as celulas da tabela e aparecer a mensagem nela.
+                if (despesas.length == 0) {
+                    lista_despesas.innerHTML = `
+                    <tr><td colspan="5">Nenhuma despesa cadastrada.</td></tr>`;
+                    mensagem_grafico.innerHTML = "Cadastre uma despesa para visualizar o gráfico.";
+                    total_previsto.innerHTML = "R$ 0,00";
+                    total_realizado.innerHTML = "R$ 0,00";
+                    return;
+                }
+
+                let somaPrevista = 0;
+                let somaRealizada = 0;
+
+                // Percorre as despesas recebidas do banco
+                for (let i = 0; i < despesas.length; i++) {
+
+                    let despesa = despesas[i];
+
+                    // Soma os valores previstos de cada categoria pra o grafico pizza
+                    if (despesa.categoria == "Hospedagem") {
+                        hospedagem += Number(despesa.valorPrevisto);
+                    } else if (despesa.categoria == "Transporte") {
+                        transporte += Number(despesa.valorPrevisto);
+                    } else if (despesa.categoria == "Alimentação") {
+                        alimentacao += Number(despesa.valorPrevisto);
+                    } else if (despesa.categoria == "Passeios") {
+                        passeios += Number(despesa.valorPrevisto);
+                    } else if (despesa.categoria == "Outros") {
+                        outros += Number(despesa.valorPrevisto);
+                    }
+
+                    somaPrevista += Number(despesa.valorPrevisto);
+
+                    if (despesa.valorRealizado != null) {
+                        somaRealizada += Number(despesa.valorRealizado);
+                    }
+
+                    // Formata o valor previsto
+                    let previsto = Number(despesa.valorPrevisto).toLocaleString("pt-BR", {
+                        style: "currency",
+                        currency: "BRL"
+                    });
+
+                    // Exibe um traço se não houver valor realizado
+                    let realizado = "—";
+
+                    if (despesa.valorRealizado != null) {
+                        realizado = Number(despesa.valorRealizado).toLocaleString("pt-BR", {
+                            style: "currency",
+                            currency: "BRL"
+                        });
+                    }
+
+                    // Adiciona a despesa à tabela, preenchendo de acordo com as colunas
+                    lista_despesas.innerHTML += `
+                    <tr>
+                        <td>${despesa.descricao}</td>
+                        <td>${despesa.categoria}</td>
+                        <td>${previsto}</td>
+                        <td>${realizado}</td>
+                        <td>${despesa.status}</td>
+                    </tr>
+                `;
+                }
+
+                // Cria o gráfico de pizza com os valores das despesas
+                criarGraficoOrcamento(hospedagem, transporte, alimentacao, passeios, outros);
+
+                // Exibe os totais abaixo da tabela
+                total_previsto.innerHTML = somaPrevista.toLocaleString("pt-BR", {
+                    style: "currency",
+                    currency: "BRL"
+                });
+
+                total_realizado.innerHTML = somaRealizada.toLocaleString("pt-BR", {
+                    style: "currency",
+                    currency: "BRL"
+                });
+
+            })
+            .catch(function (erro) {
+                console.log("Erro ao carregar despesas:", erro);
+            });
+    }
+
+    // Cadastra uma despesa para a viagem selecionada
+    function adicionarDespesa() {
+
+        // Recupera os valores preenchidos no formulário de cadastrar uma nova despesa
+        let descricao = ipt_descricao_despesa.value;
+        let categoria = ipt_categoria_despesa.value;
+        let valorPrevisto = ipt_valor_previsto.value;
+        let valorRealizado = ipt_valor_realizado.value;
+        let status = ipt_status_despesa.value;
+
+        // Recupera o ID da viagem selecionada
+        let fkViagem = sessionStorage.ID_VIAGEM;
+
+        // Valida os campos obrigatórios
+        if (descricao == "" || categoria == "" || valorPrevisto == "") {
+            alert("Preencha a descrição, a categoria e o valor previsto!");
+            return;
+        }
+
+        // Verifica se o valor previsto é válido
+        if (Number(valorPrevisto) < 0) {
+            alert("O valor previsto não pode ser negativo!");
+            return;
+        }
+
+        // Se a despesa estiver paga, exige o valor realizado
+        if (status == "Paga" && valorRealizado == "") {
+            alert("Informe o valor realizado da despesa paga!");
+            return;
+        }
+
+        if (valorRealizado != "" && Number(valorRealizado) < 0) {
+            alert("O valor realizado não pode ser negativo!");
+            return;
+        }
+
+        // Se a despesa ainda não foi paga, não possui valor realizado
+        if (status == "Prevista") {
+            valorRealizado = null;
+        }
+
+        // Envia os dados para a API
+        fetch("/despesas/cadastrar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            //transforma os dados do JavaScript em JSON para enviá-los ao servidor
+            body: JSON.stringify({
+                descricaoServer: descricao,
+                categoriaServer: categoria,
+                valorPrevistoServer: Number(valorPrevisto),
+                valorRealizadoServer: valorRealizado,
+                statusServer: status,
+                fkViagemServer: fkViagem
+            })
+        })
+            .then(function (resposta) {
+
+                if (resposta.ok) {
+                    alert("Despesa cadastrada com sucesso!");
+
+                    // Atualiza a página para carregar os novos valores toda vez que a despesa for cadastrada, mostrando as KPIs 
+                    //e barras de orçamento ja atualizados com os novos valores
+                    window.location.reload();
+
+                } else {
+                    alert("Erro ao cadastrar despesa!");
+                }
+
+            })
+            .catch(function (erro) {
+                console.log("Erro ao cadastrar despesa:", erro);
+            });
+    }
+
+    // Gráfico de despesas previstas por categoria (pizza por categoria)
+    function criarGraficoOrcamento(hospedagem, transporte, alimentacao, passeios, outros) {
+
+        new Chart("grafico_orcamento", {
+            type: "pie",
+
+            data: {
+                labels: ["Hospedagem", "Transporte", "Alimentação", "Passeios", "Outros"],
+                datasets: [{
+                    data: [hospedagem, transporte, alimentacao, passeios, outros],
+                    backgroundColor: [
+                        "#820AD1",
+                        "#D6298E",
+                        "#4F7BD9",
+                        "#23A58D",
+                        "#F5A623"
+                    ]
+                }]
+            },
+
+            options: {
+                //faz o se adaptar ao espaço disponivel
+                responsive: true,
+                //permite controlar o tamanho do grafico no css
+                maintainAspectRatio: false,
+
+                plugins: {
+                    legend: {
+                        //coloca a legenda do grafico a direita, ao inves de em cima da pizza
+                        position: "right"
+                    }
+                }
+            }
+        });
+    }
 
     function carregarMinhaViagem() {
 
@@ -306,14 +529,58 @@
             .then(function (viagens) {
 
                 for (let i = 0; i < viagens.length; i++) {
-
                     if (viagens[i].idViagem == idViagem) {
 
                         let viagem = viagens[i];
 
                         console.log("Viagem selecionada:", viagem);
 
-                        // Aqui vamos preencher o banner e as KPIs.
+                        // Preenche o banner com os dados da viagem
+                        nome_viagem.innerHTML = viagem.titulo;
+                        destino_viagem.innerHTML = "📍 " + viagem.destino + ", " + viagem.pais;
+                        status_viagem.innerHTML = viagem.status;
+
+                        // Exibe a imagem escolhida no cadastro
+                        if (viagem.imagemCapa != null && viagem.imagemCapa != "") {
+                            imagem_viagem.src = "./assets/imgs/viagens/" + viagem.imagemCapa;
+                        }
+
+                        // KPI 1 - Orçamento total
+                        let orcamento = Number(viagem.orcamento);
+                        orcamento_viagem.innerHTML = orcamento.toLocaleString("pt-BR", {
+                            style: "currency",
+                            currency: "BRL"
+                        });
+
+                        // Exibe as datas da viagem
+                        let dataInicio = new Date(viagem.dataInicio);
+                        let dataFim = new Date(viagem.dataFim);
+
+                        datas_viagem.innerHTML = "📅 " +
+                            //formata a data no padrao brasileiro. UTC é um fuso horário
+                            dataInicio.toLocaleDateString("pt-BR", { timeZone: "UTC" }) +
+                            " a " +
+                            dataFim.toLocaleDateString("pt-BR", { timeZone: "UTC" });
+
+                        // KPI 4 - Dias restantes
+                        //Pega a data de início da viagem e transforma em um objeto de data
+                        let hoje = new Date();
+                        //retorna em milissegundos
+                        let diferenca = dataInicio - hoje;
+                        //converte de milissegundos pra dias e o ceil arredonda pra cima (ex:5,2 -> 6)
+                        let dias = Math.ceil(diferenca / (1000 * 60 * 60 * 24));
+
+                        if (dias > 0) {
+                            dias_restantes.innerHTML = dias + " dias";
+                        } else {
+                            dias_restantes.innerHTML = "Viagem iniciada";
+                        }
+
+                        // Carrega as KPIs 2 e 3
+                        carregarDespesasPrevistas(orcamento);
+
+                        // Carrega a tabela de despesas
+                        carregarDespesas();
 
                         return;
                     }
@@ -325,6 +592,56 @@
             })
             .catch(function (erro) {
                 console.log("Erro ao carregar viagem:", erro);
+            });
+    }
+
+    function carregarDespesasPrevistas(orcamento) {
+
+        let idViagem = sessionStorage.ID_VIAGEM;
+
+        fetch(`/despesas/previstas/${idViagem}`)
+            .then(function (resposta) {
+                return resposta.json();
+            })
+            .then(function (resultado) {
+
+                // recupera o total previsto do banco de dados
+                let despesasPrevistas = resultado[0].totalPrevisto;
+
+                // se não houver despesas cadastradas, considera zero
+                if (despesasPrevistas == null) {
+                    despesasPrevistas = 0;
+                }
+
+                // KPI 2 - Despesas previstas
+                despesas_previstas.innerHTML = Number(despesasPrevistas).toLocaleString("pt-BR", {
+                    style: "currency",
+                    currency: "BRL"
+                });
+
+                // KPI 3 - Saldo previsto
+                let saldo = orcamento - Number(despesasPrevistas);
+
+                saldo_viagem.innerHTML = saldo.toLocaleString("pt-BR", {
+                    style: "currency",
+                    currency: "BRL"
+                });
+
+                // Percentual do orçamento comprometido
+                let percentual = 0;
+
+                if (orcamento > 0) {
+                    percentual = (Number(despesasPrevistas) / orcamento) * 100;
+                }
+
+                // Exibe o percentual do orçamento
+                percentual_orcamento.innerHTML = percentual.toFixed(0) + "% do orçamento comprometido";
+
+                // Atualiza a barra de progresso
+                barra_orcamento.value = percentual;
+            })
+            .catch(function (erro) {
+                console.log("Erro ao carregar despesas:", erro);
             });
     }
 
