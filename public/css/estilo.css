@@ -1959,16 +1959,16 @@ body.minhas-viagens {
 /* Organiza os campos em linhas */
 .linha-campos-despesa {
   display: flex;
-  gap: 16px;
+  /* faz os campos do formulario ficarem um abaixo do outro*/
+  flex-direction: column;
+  gap: 12px;
   width: 100%;
 }
 
 .linha-campos-despesa input,
 .linha-campos-despesa select {
-  flex: 1;
-  min-width: 0;
+  width: 100%;
   box-sizing: border-box;
-  text-align: left;
 }
 
 /* Tabela de despesas */
