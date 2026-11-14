@@ -2,6 +2,7 @@
 
 var database = require("../database/config");
 
+//consulta o progresso dos checklists das viagens do usuário
 function listarProgresso(fkUsuario) {
 
     var instrucaoSql = `
@@ -18,6 +19,20 @@ function listarProgresso(fkUsuario) {
     return database.executar(instrucaoSql, [fkUsuario]);
 }
 
+// Cadastra uma nova tarefa no checklist da viagem
+function cadastrarTarefa(tarefa, fkViagem) {
+
+    var instrucaoSql = `
+        INSERT INTO checklist (tarefa, fkViagem)
+        VALUES (?, ?);
+    `;
+
+    var valores = [tarefa, fkViagem];
+
+    return database.executar(instrucaoSql, valores);
+}
+
 module.exports = {
-    listarProgresso
+    listarProgresso,
+    cadastrarTarefa
 };
