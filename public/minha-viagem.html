@@ -512,6 +512,99 @@
         });
     }
 
+    // Cadastra uma nova tarefa no checklist da viagem
+    function adicionarTarefa() {
+        // recupera a tarefa digitada
+        let tarefa = ipt_tarefa.value;
+        // recupera o ID da viagem selecionada
+        let fkViagem = sessionStorage.ID_VIAGEM;
+        // Ve se o usuário preencheu o campo
+        if (tarefa == "") {
+            alert("Digite uma tarefa para adicionar ao checklist!");
+            return;
+        }
+
+        // Envia a tarefa para o banco de dados
+        fetch("/checklist/cadastrar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                tarefaServer: tarefa,
+                fkViagemServer: fkViagem
+            })
+        })
+            .then(function (resposta) {
+
+                if (resposta.ok) {
+                    alert("Tarefa cadastrada com sucesso!");
+
+                    // Limpa o campo após o cadastro
+                    ipt_tarefa.value = "";
+
+                    // Atualiza a página
+                    window.location.reload();
+
+                } else {
+                    alert("Erro ao cadastrar tarefa!");
+                }
+
+            })
+            .catch(function (erro) {
+                console.log("Erro ao cadastrar tarefa:", erro);
+            });
+    }
+
+    // carrega as tarefas do checklist da viagem
+    function carregarTarefas() {
+
+        //pega o id da viagem
+        let idViagem = sessionStorage.ID_VIAGEM;
+
+        //consulta as tarefas cadastradas da vuagem
+        fetch(`/checklist/listar/${idViagem}`)
+            .then(function (resposta) {
+                return resposta.json();
+            })
+            .then(function (tarefas) {
+
+                // limpa a lista antes de mostrar as tarefas
+                lista_checklist.innerHTML = "";
+
+                // verifica se existem tarefas cadastradas
+                if (tarefas.length == 0) {
+
+                    lista_checklist.innerHTML = "<p>Você ainda não cadastrou nenhuma tarefa.</p>";
+                    resumo_checklist.innerHTML = "Nenhuma tarefa cadastrada";
+                    barra_checklist.value = 0;
+
+                    return;
+                }
+
+                // percorre as tarefas recebidas do banco
+                for (let i = 0; i < tarefas.length; i++) {
+
+                    let tarefa = tarefas[i];
+
+                    //recupera do banco de dados a tarefa do vetor de tarefas
+                    // tarefa = nome da variável e tarefas = nome da coluna no banco de dados
+                    //ex: [{idChecklist: 1, tarefa: "Comprar passagens", concluida: 0, fkViagem: 5},
+                    //     {idChecklist: 2,tarefa: "Arrumar a mala",concluida: 0,fkViagem: 5}]
+                    lista_checklist.innerHTML += `
+                    <div class="item-checklist">
+                        <input type="checkbox" disabled>
+                        <span>${tarefa.tarefa}</span>
+                    </div>
+                `;
+                }
+
+            })
+            .catch(function (erro) {
+                console.log("Erro ao carregar checklist:", erro);
+            });
+    }
+
     function carregarMinhaViagem() {
 
         let idViagem = sessionStorage.ID_VIAGEM;
@@ -581,6 +674,9 @@
 
                         // Carrega a tabela de despesas
                         carregarDespesas();
+
+                        // Carrega as tarefas do checklist
+                        carregarTarefas();
 
                         return;
                     }

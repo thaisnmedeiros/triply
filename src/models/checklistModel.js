@@ -32,7 +32,20 @@ function cadastrarTarefa(tarefa, fkViagem) {
     return database.executar(instrucaoSql, valores);
 }
 
+// lista as tarefas do checklist de uma viagem especifica
+function listarTarefas(fkViagem) {
+
+    var instrucaoSql = `
+        SELECT *
+        FROM checklist
+        WHERE fkViagem = ?;
+    `;
+
+    return database.executar(instrucaoSql, [fkViagem]);
+}
+
 module.exports = {
     listarProgresso,
-    cadastrarTarefa
+    cadastrarTarefa,
+    listarTarefas
 };
