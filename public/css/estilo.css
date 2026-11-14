@@ -2065,10 +2065,28 @@ body.minhas-viagens {
   margin-top: 25px;
 }
 
-.adicionar-roteiro input {
-  flex: 1;
+/* Formulário do roteiro */
+.adicionar-roteiro {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+/* Campos do roteiro */
+.campos-roteiro {
+  /* deixa o nome e data lado a lado*/
+  display: flex;
+  gap: 12px;
+}
+
+.campos-roteiro input {
+  width: 50%;
   min-width: 0;
-  padding: 12px;
-  border: 1px solid #EAE4F0;
-  border-radius: 8px;
+}
+
+/* Botão para adicionar atividade */
+.adicionar-roteiro button {
+  /*coloca so o botao pra a direita */
+  align-self: flex-end;
 }
