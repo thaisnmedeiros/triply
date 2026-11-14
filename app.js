@@ -15,6 +15,7 @@ var HOST_APP = process.env.APP_HOST;
 
 var app = express();
 
+//registra as rotas
 var indexRouter = require("./src/routes/index");
 var usuarioRouter = require("./src/routes/usuarios");
 var avisosRouter = require("./src/routes/avisos");
@@ -24,6 +25,7 @@ var empresasRouter = require("./src/routes/empresas");
 var viagensRouter = require("./src/routes/viagens");
 var checklistRouter = require("./src/routes/checklist");
 var despesasRouter = require("./src/routes/despesas");
+var experienciasRouter = require("./src/routes/experiencias");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -40,6 +42,7 @@ app.use("/empresas", empresasRouter);
 app.use("/viagens", viagensRouter);
 app.use("/checklist", checklistRouter);
 app.use("/despesas", despesasRouter);
+app.use("/experiencias", experienciasRouter);
 
 app.listen(PORTA_APP, function () {
     console.log(`

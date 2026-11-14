@@ -678,6 +678,103 @@
             });
     }
 
+    // cadastra uma atividade no roteiro da viagem
+    function adicionarAtividade() {
+
+        //tenta recuperar os dados preenchidos
+        let nome = ipt_atividade.value;
+        let dataExperiencia = ipt_data_atividade.value;
+
+        //recupera o ID da viagem selecionada
+        let fkViagem = sessionStorage.ID_VIAGEM;
+
+        //ve se os campos foram preenchidos
+        if (nome == "" || dataExperiencia == "") {
+            alert("Preencha o nome e a data da atividade!");
+            return;
+        }
+
+        // Envia os dados para o banco de dados
+        //JSON.stringify() transforma os dados em texto JSON
+        fetch("/experiencias/cadastrar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                nomeServer: nome,
+                dataExperienciaServer: dataExperiencia,
+                fkViagemServer: fkViagem
+            })
+        })
+            .then(function (resposta) {
+
+                if (resposta.ok) {
+                    alert("Atividade cadastrada com sucesso!");
+
+                    // Limpa os campos
+                    ipt_atividade.value = "";
+                    ipt_data_atividade.value = "";
+
+                    // Atualiza a página
+                    window.location.reload();
+
+                } else {
+                    alert("Erro ao cadastrar atividade!");
+                }
+
+            })
+            .catch(function (erro) {
+                console.log("Erro ao cadastrar atividade:", erro);
+            });
+    }
+
+    // Carrega as atividades do roteiro da viagem
+    function carregarAtividades() {
+
+        let idViagem = sessionStorage.ID_VIAGEM;
+
+        fetch(`/experiencias/listar/${idViagem}`)
+            .then(function (resposta) {
+                return resposta.json();
+            })
+            .then(function (atividades) {
+
+                // Limpa a lista antes de mostrar as atividades
+                lista_roteiro.innerHTML = "";
+
+                // Verifica se existem atividades cadastradas
+                if (atividades.length == 0) {
+                    lista_roteiro.innerHTML = "<p>Você ainda não cadastrou nenhuma atividade.</p>";
+                    return;
+                }
+
+                // Percorre as atividades recebidas do banco
+                for (let i = 0; i < atividades.length; i++) {
+
+                    let atividade = atividades[i];
+
+                    // Formata a data para o padrão brasileiro
+                    let data = new Date(atividade.dataExperiencia);
+
+                    let dataFormatada = data.toLocaleDateString("pt-BR", {
+                        timeZone: "UTC"
+                    });
+
+                    // Adiciona a atividade na página
+                    lista_roteiro.innerHTML += `
+                    <div class="item-roteiro">
+                        <span>${dataFormatada}</span>
+                        <p>${atividade.nome}</p>
+                    </div>
+                `;
+                }
+            })
+            .catch(function (erro) {
+                console.log("Erro ao carregar roteiro:", erro);
+            });
+    }
+
     function carregarMinhaViagem() {
 
         let idViagem = sessionStorage.ID_VIAGEM;
@@ -750,6 +847,9 @@
 
                         // Carrega as tarefas do checklist
                         carregarTarefas();
+
+                        // Carrega os roteiros
+                        carregarAtividades();
 
                         return;
                     }
