@@ -1840,26 +1840,13 @@ body.minhas-viagens {
   margin-bottom: 10px;
 }
 
-/* Barra de progresso do orçamento */
 /* tá com o # porque ta referenciando um ID e nao uma classe*/
+/* Barra de progresso do orçamento */
 #barra_orcamento {
   width: 100%;
   height: 18px;
-  border-radius: 10px;
-  overflow: hidden;
-}
-
-/* esse ::-webkit-progress-bar permite personalizar fundo e preenchimento de algum elemento*/
-/* Cor de fundo da barra de progresso de gastos. Essa area representa a barra completa, 100%*/
-#barra_orcamento::-webkit-progress-bar {
-  background-color: #F0EAF5;
-  border-radius: 10px;
-}
-
-/* Cor da parte preenchida da barra de progresso de gastos, representa a area que vai ocupar o orçamento comprometido*/
-#barra_orcamento::-webkit-progress-value {
-  background-color: #820AD1;
-  border-radius: 10px;
+  /* accent faz com que a parte da barra que ficar preenchida vai ficar roxa*/
+  accent-color: #820AD1;
 }
 
 /* Área do checklist */

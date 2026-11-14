@@ -44,8 +44,24 @@ function listarTarefas(fkViagem) {
     return database.executar(instrucaoSql, [fkViagem]);
 }
 
+// Atualiza o status de uma tarefa do checklist quando a pessoa clica no checkbox (0 ou 1)
+//se o usuario desmarcar o checkbox, fica concluida = 0
+function atualizarTarefa(idChecklist, concluida, fkViagem) {
+
+    var instrucaoSql = `
+        UPDATE checklist
+        SET concluida = ?
+        WHERE idChecklist = ? AND fkViagem = ?;
+    `;
+
+    var valores = [concluida, idChecklist, fkViagem];
+
+    return database.executar(instrucaoSql, valores);
+}
+
 module.exports = {
     listarProgresso,
     cadastrarTarefa,
-    listarTarefas
+    listarTarefas,
+    atualizarTarefa
 };

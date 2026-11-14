@@ -18,4 +18,13 @@ router.get("/listar/:fkViagem", function (req, res) {
     checklistController.listarTarefas(req, res);
 });
 
+// Atualiza o status de uma tarefa do checklist quando o usuario marca ou desmarca (atualializa a coluna "concluida" pra 0 ou 1)
+router.put("/atualizar", function (req, res) {
+    checklistController.atualizarTarefa(req, res);
+});
+
 module.exports = router;
+
+//GET - CONSULTA INFORMAÇÕES
+//POST - CADASTRA INFORMAÇÕES
+//PUT - ATUALIZA INFORMAÇÕES

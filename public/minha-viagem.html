@@ -567,7 +567,11 @@
             .then(function (resposta) {
                 return resposta.json();
             })
+
+            //pega o que vem do banco de dados
             .then(function (tarefas) {
+                // Contador de tarefas concluídas
+                let tarefasConcluidas = 0;
 
                 // limpa a lista antes de mostrar as tarefas
                 lista_checklist.innerHTML = "";
@@ -585,23 +589,93 @@
                 // percorre as tarefas recebidas do banco
                 for (let i = 0; i < tarefas.length; i++) {
 
-                    let tarefa = tarefas[i];
+                    //recupera do banco de dados a tarefa do vetor de item
+                    let item = tarefas[i];
 
-                    //recupera do banco de dados a tarefa do vetor de tarefas
-                    // tarefa = nome da variável e tarefas = nome da coluna no banco de dados
+                    // Conta as tarefas concluídas
+                    if (item.concluida == 1) {
+                        tarefasConcluidas++;
+                    }
+
+                    // item = nome da variável e tarefas = nome da coluna no banco de dados
                     //ex: [{idChecklist: 1, tarefa: "Comprar passagens", concluida: 0, fkViagem: 5},
                     //     {idChecklist: 2,tarefa: "Arrumar a mala",concluida: 0,fkViagem: 5}]
+                    // ve se a tarefa já foi concluída (1)
+                    let marcado = "";
+
+                    if (item.concluida == 1) {
+                        marcado = "checked";
+                    }
+
+                    // adiciona a tarefa na página. se for marcado, é para aparecer com o visto de checked
+                    //${item.idChecklist} fala qual a tarefa que esta sendo marcada
+                    //o onchange muda para o 1 ou 0 a partir do momento que o usuario clica e chama a funcao atualizartarefa
+                    //this.checked fala se o checkbox esta marcado (true) ou nao (false)
+                    //${item.tarefa} mostra o texto da tarefa
                     lista_checklist.innerHTML += `
-                    <div class="item-checklist">
-                        <input type="checkbox" disabled>
-                        <span>${tarefa.tarefa}</span>
-                    </div>
-                `;
+                        <div class="item-checklist">
+                            <input type="checkbox" ${marcado}
+                                onchange="atualizarTarefa(${item.idChecklist}, this.checked)">
+                            <span>${item.tarefa}</span>
+                        </div>
+                    `;
                 }
+
+                // Calcula o progresso do checklist
+                //tarefas.length é a quantidade de tarefas do banco de dados
+                let totalTarefas = tarefas.length;
+                let percentual = (tarefasConcluidas / totalTarefas) * 100;
+                // Atualiza o resumo dos preparativos
+                resumo_checklist.innerHTML = tarefasConcluidas + " de " +
+                    totalTarefas + " tarefas concluídas";
+
+                // Atualiza a barra de progresso
+                barra_checklist.value = percentual;
 
             })
             .catch(function (erro) {
                 console.log("Erro ao carregar checklist:", erro);
+            });
+    }
+
+    // atualiza o status de uma tarefa no banco de dados
+    function atualizarTarefa(idChecklist, marcado) {
+
+        let concluida = 0;
+
+        if (marcado == true) {
+            concluida = 1;
+        }
+
+        let fkViagem = sessionStorage.ID_VIAGEM;
+
+        fetch("/checklist/atualizar", {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                idChecklistServer: idChecklist,
+                concluidaServer: concluida,
+                fkViagemServer: fkViagem
+            })
+        })
+            .then(function (resposta) {
+
+                if (resposta.ok) {
+
+                    // Recarrega as tarefas para atualizar o progresso
+                    carregarTarefas();
+
+                } else {
+                    alert("Erro ao atualizar tarefa!");
+                    carregarTarefas();
+                }
+
+            })
+            .catch(function (erro) {
+                console.log("Erro ao atualizar tarefa:", erro);
+                carregarTarefas();
             });
     }
 

@@ -66,10 +66,43 @@ function listarTarefas(req, res) {
     }
 }
 
+// Atualiza uma tarefa do checklist quando o usuario marca ou desmarca o checklist (atualiza o valor p/ 0 ou 1)
+function atualizarTarefa(req, res) {
+
+    // Recupera os dados enviados pelo JavaScript
+    let idChecklist = req.body.idChecklistServer;
+    let concluida = req.body.concluidaServer;
+    let fkViagem = req.body.fkViagemServer;
+
+    // Verifica se os dados foram enviados
+    if (idChecklist == undefined ||
+        concluida == undefined ||
+        fkViagem == undefined) {
+
+        res.status(400).send("Dados da tarefa não informados!");
+
+    } else if (concluida != 0 && concluida != 1) {
+
+        res.status(400).send("Status da tarefa inválido!");
+
+    } else {
+
+        checklistModel.atualizarTarefa(idChecklist, concluida, fkViagem)
+            .then(function (resultado) {
+                res.json(resultado);
+            })
+            .catch(function (erro) {
+                console.log("Erro ao atualizar tarefa:", erro);
+                res.status(500).send("Erro ao atualizar tarefa!");
+            });
+    }
+}
+
 module.exports = {
     listarProgresso,
     cadastrarTarefa,
-    listarTarefas
+    listarTarefas,
+    atualizarTarefa
 };
 
 //O model vai consultar o banco e retornar:
