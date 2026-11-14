@@ -170,14 +170,15 @@
                         /* soma os orçamentos das viagens */
                         orcamentoTotal += Number(viagens[i].orcamento);
 
+                        //o onclick faz funcionar a funcao abrirViagem, que leva pra a dashboard individual que o usuario selecionou
                         lista_viagens.innerHTML += `
-                    <div class="card-viagem">
-                        <h3>${viagens[i].titulo}</h3>
-                        <p>Destino: ${viagens[i].destino}</p>
-                        <p>Status: ${viagens[i].status}</p>
-                        <p>Orçamento: R$ ${viagens[i].orcamento}</p>
-                    </div>
-                `;
+                            <div class="card-viagem" onclick="abrirViagem(${viagens[i].idViagem})">
+                                <h3>${viagens[i].titulo}</h3>
+                                <p>Destino: ${viagens[i].destino}</p>
+                                <p>Status: ${viagens[i].status}</p>
+                                <p>Orçamento: R$ ${viagens[i].orcamento}</p>
+                            </div>
+                        `;
                     }
 
                     /* calcula os dias restantes para a próxima viagem */
@@ -383,6 +384,14 @@
         }
         /* inicia o carregamento das informações da dashboard */
         carregarViagens();
+
+        // Abre a dashboard individual da viagem selecionada
+        function abrirViagem(idViagem) {
+            //pega o ID da viagem que o usuario selecionou (ex: recife)
+            sessionStorage.ID_VIAGEM = idViagem;
+            //redireciona o usuario pra a dashboard da viagem selecionada
+            window.location.href = "minha-viagem.html";
+        }
 
     </script>
 
