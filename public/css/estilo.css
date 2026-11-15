@@ -2118,6 +2118,10 @@ body.minhas-viagens {
   padding: 24px;
   border-radius: 12px;
   margin: 24px 0;
+  /*permite que a lista cresça so ate 400px de altura */
+  max-height: 400px;
+  /*coloca uma barra de rolagem pra o usuario scrollar quando ultrapassar dessa altura */
+  overflow-y: auto;
 }
 
 /* Cada atividade */
@@ -2172,4 +2176,49 @@ body.minhas-viagens {
 .adicionar-roteiro button {
   /*coloca so o botao pra a direita */
   align-self: flex-end;
+}
+
+/* Card de cada dia */
+.dia-roteiro {
+  background-color: white;
+  border-radius: 12px;
+  margin-bottom: 12px;
+  overflow: hidden;
+}
+
+/* Cabeçalho com a data */
+.dia-roteiro h3 {
+  background-color: #F0E4FF;
+  color: #820AD1;
+  padding: 10px 14px;
+  margin: 0;
+  font-size: 14px;
+}
+
+/* Área das atividades */
+.atividades-do-dia {
+  padding: 4px 14px;
+}
+
+/* Cada atividade cadastrada */
+.atividade-roteiro {
+  padding: 8px 0;
+  border-bottom: 1px solid #EAE4F0;
+}
+
+/* Última atividade do dia */
+.atividade-roteiro:last-child {
+  border-bottom: none;
+}
+
+/* Alterna a cor dos cabeçalhos 
+Seleciona os cards que estao nas posicoes pares*/
+.dia-roteiro:nth-child(even) h3 {
+  background-color: #FCE4F1;
+  color: #B51F76;
+}
+
+/* Remove a borda da última atividade */
+.atividade-roteiro:last-child {
+  border-bottom: none;
 }

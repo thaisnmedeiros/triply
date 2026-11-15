@@ -774,17 +774,16 @@
     function carregarAtividades() {
 
         let idViagem = sessionStorage.ID_VIAGEM;
+        console.log("ID da viagem selecionada:", idViagem);
 
         fetch(`/experiencias/listar/${idViagem}`)
             .then(function (resposta) {
                 return resposta.json();
             })
             .then(function (atividades) {
-
-                // Limpa a lista antes de mostrar as atividades
+                console.log("Atividades recebidas do banco:", atividades);
                 lista_roteiro.innerHTML = "";
 
-                // Verifica se existem atividades cadastradas
                 if (atividades.length == 0) {
                     lista_roteiro.innerHTML = "<p>Você ainda não cadastrou nenhuma atividade.</p>";
                     return;
@@ -794,22 +793,46 @@
                 for (let i = 0; i < atividades.length; i++) {
 
                     let atividade = atividades[i];
-
-                    // Formata a data para o padrão brasileiro
                     let data = new Date(atividade.dataExperiencia);
-
                     let dataFormatada = data.toLocaleDateString("pt-BR", {
                         timeZone: "UTC"
                     });
 
-                    // Adiciona a atividade na página
-                    lista_roteiro.innerHTML += `
-                    <div class="item-roteiro">
-                        <span>${dataFormatada}</span>
-                        <p>${atividade.nome}</p>
+                    // Verifica se a data já apareceu anteriormente
+                    let dataRepetida = false;
+
+                    for (let j = 0; j < i; j++) {
+
+                        if (atividades[j].dataExperiencia == atividade.dataExperiencia) {
+                            dataRepetida = true;
+                        }
+                    }
+
+                    // Cria um card somente para datas que ainda não apareceram e cria um grupo de roteiros pra essa data
+                    if (dataRepetida == false) {
+
+                        lista_roteiro.innerHTML += `
+                            <div class="dia-roteiro" id="dia_${i}">
+                                <h3>📅 ${dataFormatada}</h3>
+                                <div class="atividades-do-dia" id="atividades_${i}"></div>
+                            </div>
+                        `;
+
+                        // Procura todas as atividades daquela data
+                        for (let j = i; j < atividades.length; j++) {
+
+                            if (atividades[j].dataExperiencia == atividade.dataExperiencia) {
+
+                                document.getElementById(`atividades_${i}`).innerHTML += `
+                    <div class="atividade-roteiro">
+                        <p>${atividades[j].nome}</p>
                     </div>
                 `;
+                            }
+                        }
+                    }
                 }
+
             })
             .catch(function (erro) {
                 console.log("Erro ao carregar roteiro:", erro);
@@ -826,7 +849,7 @@
             return;
         }
 
-        fetch(`/viagens/listar/${fkUsuario}`)
+        fetch(`/viagens/listar/${fkUsuario} `)
             .then(function (resposta) {
                 return resposta.json();
             })
@@ -909,7 +932,7 @@
 
         let idViagem = sessionStorage.ID_VIAGEM;
 
-        fetch(`/despesas/previstas/${idViagem}`)
+        fetch(`/ despesas / previstas / ${idViagem}`)
             .then(function (resposta) {
                 return resposta.json();
             })
