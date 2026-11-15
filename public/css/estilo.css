@@ -1932,23 +1932,28 @@ body.minhas-viagens {
   display: flex;
   flex-direction: column;
   gap: 16px;
-  width: 100%;
   padding: 24px;
   margin: 24px 0;
   background-color: #F7F0FC;
   border-radius: 14px;
-  /*pra nao ultrapassar a largura do card do formulario de despesa */
-  box-sizing: border-box;
 }
 
-.formulario-despesa input,
-.formulario-despesa select {
-  padding: 12px;
-  border: 1px solid #EAE4F0;
-  border-radius: 8px;
-  margin: 5px;
+/* Organização dos campos */
+.linha-campos-despesa {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+}
+
+/* Campos do formulário */
+.linha-campos-despesa input,
+.linha-campos-despesa select {
   flex: 1;
   min-width: 0;
+  padding: 12px;
+  border: 1px solid #E8DFF0;
+  border-radius: 8px;
+  background-color: white;
 }
 
 /* Alinha o botão à direita */
@@ -1957,19 +1962,22 @@ body.minhas-viagens {
   justify-content: flex-end;
 }
 
-/* Organiza os campos em linhas */
-.linha-campos-despesa {
-  display: flex;
-  /* faz os campos do formulario ficarem um abaixo do outro*/
-  flex-direction: column;
-  gap: 12px;
-  width: 100%;
+/* Primeira linha: descrição e categoria */
+.linha-campos-despesa:first-child input {
+  flex: 1.5;
 }
 
-.linha-campos-despesa input,
-.linha-campos-despesa select {
-  width: 100%;
-  box-sizing: border-box;
+.linha-campos-despesa:first-child select {
+  flex: 1;
+}
+
+/* Segunda linha: valores e status */
+.linha-campos-despesa:nth-child(2) input {
+  flex: 1.5;
+}
+
+.linha-campos-despesa:nth-child(2) select {
+  flex: 1;
 }
 
 /* Tabela de despesas */
@@ -2001,19 +2009,66 @@ body.minhas-viagens {
   color: #625A75;
 }
 
+/* Aparência das categorias e dos status */
+.tabela-despesas td span {
+  /*ao inves de preencher toda a linha, so preenche o que o texto ocupar */
+  display: inline-block;
+  padding: 6px 10px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* Categorias */
+/* Hospedagem - Roxo */
+.categoria-hospedagem {
+  background-color: #F0E4FF;
+  color: #820AD1;
+}
+
+/* Transporte - Rosa */
+.categoria-transporte {
+  background-color: #FCE4F1;
+  color: #B51F76;
+}
+
+/* Alimentação - Azul */
+.categoria-alimentacao {
+  background-color: #E2F0FF;
+  color: #2361A8;
+}
+
+/* Passeios - Verde */
+.categoria-passeios {
+  background-color: #DFF5EE;
+  color: #187D67;
+}
+
+/* Outros - Laranja */
+.categoria-outros {
+  background-color: #FFF0DF;
+  color: #A85B18;
+}
+
+/* Status */
+.status-prevista {
+  background-color: #F0E4FF;
+  color: #820AD1;
+}
+
+.status-paga {
+  background-color: #E1F5E5;
+  color: #237A3B;
+}
+
 /* Totais das despesas */
 .total-despesas {
   display: flex;
   justify-content: space-between;
   margin-top: 25px;
-  padding-top: 15px;
   background-color: #F5E9FC;
   padding: 20px 24px;
   border-radius: 12px;
-}
-
-.tabela-despesas thead {
-  background-color: #F3E8FA;
 }
 
 .tabela-despesas tbody tr:hover {

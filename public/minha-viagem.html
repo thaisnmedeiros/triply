@@ -177,7 +177,6 @@
                     </div>
 
                     <!-- Formulário para nova despesa -->
-                    <!-- Formulário para nova despesa -->
                     <div class="formulario-despesa" id="formulario_despesa">
 
                         <!-- Primeira linha -->
@@ -371,16 +370,49 @@
                         });
                     }
 
-                    // Adiciona a despesa à tabela, preenchendo de acordo com as colunas
+                    // Define a classe de acordo com a categoria da despesa
+                    let classeCategoria = "";
+
+                    //verifica qual categoria está cadastrada no banco e define uma classe CSS correspondente
+                    if (despesa.categoria == "Hospedagem") {
+                        classeCategoria = "categoria-hospedagem";
+                    } else if (despesa.categoria == "Transporte") {
+                        classeCategoria = "categoria-transporte";
+                    } else if (despesa.categoria == "Alimentação") {
+                        classeCategoria = "categoria-alimentacao";
+                    } else if (despesa.categoria == "Passeios") {
+                        classeCategoria = "categoria-passeios";
+                    } else {
+                        classeCategoria = "categoria-outros";
+                    }
+
+                    // Define a classe de acordo com o status
+                    let classeStatus = "";
+
+                    if (despesa.status == "Paga") {
+                        classeStatus = "status-paga";
+                    } else {
+                        classeStatus = "status-prevista";
+                    }
+
+                    // Adiciona a despesa à tabela
                     lista_despesas.innerHTML += `
-                    <tr>
-                        <td>${despesa.descricao}</td>
-                        <td>${despesa.categoria}</td>
-                        <td>${previsto}</td>
-                        <td>${realizado}</td>
-                        <td>${despesa.status}</td>
-                    </tr>
-                `;
+                            <tr>
+                                <td>${despesa.descricao}</td>
+                                <td>
+                                    <span class="${classeCategoria}">
+                                        ${despesa.categoria}
+                                    </span>
+                                </td>
+                                <td>${previsto}</td>
+                                <td>${realizado}</td>
+                                <td>
+                                    <span class="${classeStatus}">
+                                        ${despesa.status}
+                                    </span>
+                                </td>
+                            </tr>
+                        `;
                 }
 
                 // Cria o gráfico de pizza com os valores das despesas
