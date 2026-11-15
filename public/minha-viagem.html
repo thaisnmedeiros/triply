@@ -849,7 +849,7 @@
             return;
         }
 
-        fetch(`/viagens/listar/${fkUsuario} `)
+        fetch(`/viagens/listar/${fkUsuario}`)
             .then(function (resposta) {
                 return resposta.json();
             })
@@ -932,7 +932,7 @@
 
         let idViagem = sessionStorage.ID_VIAGEM;
 
-        fetch(`/ despesas / previstas / ${idViagem}`)
+        fetch(`/despesas/previstas/${idViagem}`)
             .then(function (resposta) {
                 return resposta.json();
             })

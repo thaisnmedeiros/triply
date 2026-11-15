@@ -546,58 +546,6 @@ body {
   padding: 12px 25px;
 }
 
-/* Quiz de destinos */
-
-.quiz-home {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 40px;
-  padding: 40px 8%;
-  background-color: white;
-}
-
-.quiz-textos {
-  width: 45%;
-}
-
-.quiz-textos h3 {
-  color: #FF1493;
-  font-size: 16px;
-}
-
-.quiz-textos h1 {
-  color: #1D142B;
-  font-size: 52px;
-  line-height: 1.1;
-}
-
-.quiz-textos h1 span {
-  color: #820AD1;
-}
-
-.quiz-textos p {
-  color: #625A75;
-  font-size: 22px;
-  line-height: 1.4;
-}
-
-.quiz-textos h4 {
-  display: inline-block;
-  background-color: #F3E8FF;
-  color: #A020F0;
-  padding: 15px;
-  border-radius: 20px;
-}
-
-.quiz-imagem {
-  width: 55%;
-}
-
-.quiz-imagem img {
-  width: 100%;
-}
-
 /* Destinos da Home */
 
 .destinos-home {
