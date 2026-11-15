@@ -1850,6 +1850,33 @@ body.minhas-viagens {
   accent-color: #820AD1;
 }
 
+/* Orçamento próximo do limite (85% a 100%)*/
+#barra_orcamento.barra-orcamento-atencao {
+  accent-color: #F59E0B;
+}
+
+/* Orçamento ultrapassado (> 100%)*/
+#barra_orcamento.barra-orcamento-excedido {
+  accent-color: #D62828;
+}
+
+/* Mensagem de alerta */
+#alerta_orcamento {
+  margin-top: 10px;
+  font-size: 13px;
+}
+
+/* Mensagem quando o orçamento está próximo do limite (> 85% e < 100%)*/
+.alerta-orcamento-atencao {
+  color: #B86A12;
+}
+
+/* Mensagem quando o orçamento foi ultrapassado */
+.alerta-orcamento-excedido {
+  color: #D62828;
+  font-weight: bold;
+}
+
 /* Área do checklist */
 .area-checklist h3 {
   font-size: 15px;

@@ -127,7 +127,12 @@
                         <p id="percentual_orcamento">
                             --% do orçamento comprometido
                         </p>
+
                         <progress id="barra_orcamento" value="0" max="100"></progress>
+
+                        <!-- mensagem de alerta quando ultrapassar de 100%-->
+                        <p id="alerta_orcamento"></p>
+
                     </div>
 
                 </div>
@@ -944,6 +949,28 @@
 
                 // Atualiza a barra de progresso
                 barra_orcamento.value = percentual;
+
+                // Verifica se o orçamento está dentro do limite
+                if (percentual > 100) {
+                    alerta_orcamento.innerHTML = "⚠️ Orçamento ultrapassado! Suas despesas previstas excedem o orçamento da viagem.";
+                    //classname deixa que o JS aplique uma classe a esse elemento
+                    alerta_orcamento.className = "alerta-orcamento-excedido";
+                    barra_orcamento.className = "barra-orcamento-excedido";
+                } else if (percentual >= 80) {
+
+                    alerta_orcamento.innerHTML = "⚠️ Atenção! Você já comprometeu grande parte do orçamento.";
+
+                    alerta_orcamento.className = "alerta-orcamento-atencao";
+                    barra_orcamento.className = "barra-orcamento-atencao";
+
+                } else {
+
+                    alerta_orcamento.innerHTML = "";
+
+                    alerta_orcamento.className = "";
+                    barra_orcamento.className = "";
+
+                }
             })
             .catch(function (erro) {
                 console.log("Erro ao carregar despesas:", erro);
