@@ -233,6 +233,7 @@
                                 <th>Categoria</th>
                                 <th>Valor previsto</th>
                                 <th>Valor realizado</th>
+                                <th>Diferença</th>
                                 <th>Status</th>
                             </tr>
                         </thead>
@@ -316,16 +317,17 @@
                 let alimentacao = 0;
                 let passeios = 0;
                 let outros = 0;
+                //variavel pra guardar o valor realizado da despesa
 
                 // Limpa a tabela antes de adicionar os registros
                 lista_despesas.innerHTML = "";
                 //limpa a mensagem do grafico pizza antes de criar o grafico
                 mensagem_grafico.innerHTML = "";
 
-                // Se não houver despesas cadastradas. o colspan = 5 coloca pra mesclar as celulas da tabela e aparecer a mensagem nela.
+                // Se não houver despesas cadastradas. o colspan = 6 coloca pra mesclar as celulas da tabela e aparecer a mensagem nela.
                 if (despesas.length == 0) {
                     lista_despesas.innerHTML = `
-                    <tr><td colspan="5">Nenhuma despesa cadastrada.</td></tr>`;
+                    <tr><td colspan="6">Nenhuma despesa cadastrada.</td></tr>`;
                     mensagem_grafico.innerHTML = "Cadastre uma despesa para visualizar o gráfico.";
                     total_previsto.innerHTML = "R$ 0,00";
                     total_realizado.innerHTML = "R$ 0,00";
@@ -375,6 +377,35 @@
                         });
                     }
 
+                    // Calcula a diferença entre o valor previsto e o realizado e através da classe, estiliza de acordo com o resultado, se foi posit. ou neg.
+                    let diferenca = "—";
+                    let classeDiferenca = "";
+
+                    if (despesa.valorRealizado != null) {
+
+                        let valorDiferenca = Number(despesa.valorPrevisto) - Number(despesa.valorRealizado);
+
+                        // Define a cor de acordo com o resultado
+                        if (valorDiferenca > 0) {
+                            classeDiferenca = "diferenca-positiva";
+                        } else if (valorDiferenca < 0) {
+                            classeDiferenca = "diferenca-negativa";
+                        } else {
+                            classeDiferenca = "diferenca-neutra";
+                        }
+
+                        // Formata o valor em reais
+                        diferenca = valorDiferenca.toLocaleString("pt-BR", {
+                            style: "currency",
+                            currency: "BRL"
+                        });
+
+                        // Adiciona o sinal de positivo quando houve economia
+                        if (valorDiferenca > 0) {
+                            diferenca = "+" + diferenca;
+                        }
+                    }
+
                     // Define a classe de acordo com a categoria da despesa
                     let classeCategoria = "";
 
@@ -400,7 +431,7 @@
                         classeStatus = "status-prevista";
                     }
 
-                    // Adiciona a despesa à tabela
+                    // Adiciona a despesa à tabela. O valor de "classeDiferenca" vai alterar de acordo com o resultado, positivo ou negativo e estilizar de acordo.
                     lista_despesas.innerHTML += `
                             <tr>
                                 <td>${despesa.descricao}</td>
@@ -411,6 +442,7 @@
                                 </td>
                                 <td>${previsto}</td>
                                 <td>${realizado}</td>
+                                <td class="${classeDiferenca}">${diferenca}</td>
                                 <td>
                                     <span class="${classeStatus}">
                                         ${despesa.status}
