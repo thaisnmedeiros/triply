@@ -319,8 +319,11 @@
                     let orcamentoTotal = Number(sessionStorage.ORCAMENTO_TOTAL);
                     let saldo = orcamentoTotal - totalGasto;
 
-                    /* atualiza a KPI */
-                    saldo_disponivel.innerHTML = "R$ " + saldo.toFixed(2);
+                    /* atualiza a KPI e converte pra formato brasileiro*/
+                    saldo_disponivel.innerHTML = Number(saldo).toLocaleString("pt-BR", {
+                        style: "currency",
+                        currency: "BRL"
+                    });
 
                     /* recupera os dados das viagens */
                     let nomesViagens = JSON.parse(sessionStorage.NOMES_VIAGENS);
