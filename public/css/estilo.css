@@ -1858,6 +1858,10 @@ body.minhas-viagens {
 /* Lista de tarefas */
 .lista-checklist {
   margin-top: 25px;
+  /*coloca essa como sendo a altura maxima*/
+  max-height: 280px;
+  /* coloca uma barra de rolagem vertical quando as tarefas ultrapassarem essa altura */
+  overflow-y: auto;
 }
 
 /* Cada tarefa */
@@ -1976,6 +1980,13 @@ body.minhas-viagens {
   border-collapse: collapse;
 }
 
+/* Rolagem da tabela de despesas */
+.rolagem-despesas {
+  /*altura maxima de 300 px, se passar disso, o usuario precisa "scrollar"*/
+  max-height: 300px;
+  overflow-y: auto;
+}
+
 .tabela-despesas th,
 .tabela-despesas td {
   padding: 12px 6px;
@@ -2081,8 +2092,8 @@ body.minhas-viagens {
   padding: 24px;
   border-radius: 12px;
   margin: 24px 0;
-  /*permite que a lista cresça so ate 400px de altura */
-  max-height: 400px;
+  /*permite que a lista cresça so ate 500px de altura */
+  max-height: 500px;
   /*coloca uma barra de rolagem pra o usuario scrollar quando ultrapassar dessa altura */
   overflow-y: auto;
 }
