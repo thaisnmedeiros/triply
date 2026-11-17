@@ -17,6 +17,9 @@
     <!-- Biblioteca para criar o gráfico -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
+    <!-- Complemento para mostrar porcentagens no gráfico de orçamentos-->
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0"></script>
+
 </head>
 
 <body class="minha-viagem">
@@ -454,6 +457,9 @@
                         `;
                 }
 
+                // "Chama" esse complemento do Chart JS pra mostrar a porcentagem no grafico de orçamento
+                Chart.register(ChartDataLabels);
+
                 // Cria o gráfico de pizza com os valores das despesas
                 criarGraficoOrcamento(hospedagem, transporte, alimentacao, passeios, outros);
 
@@ -553,6 +559,9 @@
     // Gráfico de despesas previstas por categoria (pizza por categoria)
     function criarGraficoOrcamento(hospedagem, transporte, alimentacao, passeios, outros) {
 
+        // Soma os valores previstos de todas as categorias
+        let total = hospedagem + transporte + alimentacao + passeios + outros;
+
         new Chart("grafico_orcamento", {
             type: "pie",
 
@@ -580,10 +589,33 @@
                     legend: {
                         //coloca a legenda do grafico a direita, ao inves de em cima da pizza
                         position: "right"
+                    },
+
+                    datalabels: {
+                        //deixa os percentuais brancos
+                        color: "#FFFFFF",
+                        font: {
+                            weight: "bold",
+                            size: 14
+                        },
+
+                        //define o texto que vai aparecer em cada fatia
+                        formatter: function (valor) {
+
+                            if (valor == 0 || total == 0) {
+                                //Evita mostrar porcentagens em categorias sem valores
+                                return "";
+                            }
+
+                            let porcentagem = (valor / total) * 100;
+
+                            return porcentagem.toFixed(1) + "%";
+                        }
                     }
                 }
             }
         });
+
     }
 
     // Cadastra uma nova tarefa no checklist da viagem
