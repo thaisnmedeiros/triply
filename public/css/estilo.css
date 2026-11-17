@@ -2178,6 +2178,13 @@ body.minhas-viagens {
 .atividade-roteiro {
   padding: 8px 0;
   border-bottom: 1px solid #EAE4F0;
+  transition: background-color 0.2s;
+}
+
+/* Destaque quando o mouse passa sobre uma atividade */
+.atividade-roteiro:hover {
+  background-color: #FAF5FF;
+  border-radius: 8px;
 }
 
 /* Última atividade do dia */
