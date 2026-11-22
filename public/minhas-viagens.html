@@ -217,6 +217,8 @@
                     console.log("Erro ao carregar viagens:", erro);
                 });
         }
+
+
         function carregarPreparativos() {
 
             let idUsuario = sessionStorage.ID_USUARIO;
@@ -267,6 +269,7 @@
 
                     new Chart("grafico_preparativos", {
                         type: "bar",
+                        //coloca o nome das viagens na vertical, na esquerda
 
                         data: {
                             labels: nomesViagens,
@@ -280,8 +283,10 @@
 
                         options: {
                             responsive: true,
+                            indexAxis: "y",
+
                             scales: {
-                                y: {
+                                x: {
                                     beginAtZero: true,
                                     max: 100
                                 }
@@ -295,7 +300,7 @@
                 });
         }
 
-        // função para carregar a KPI 4 da dashboard, de "saldo disponivel"
+
         // função para carregar a KPI 4 da dashboard, de "saldo disponivel"
         function carregarGastos() {
 
