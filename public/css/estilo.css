@@ -1873,14 +1873,39 @@ body.minhas-viagens {
   border-bottom: 1px solid #EAE4F0;
 }
 
-.item-checklist input {
-  /* quando for clicado o chacklist, vai ficar roxo*/
-  accent-color: #820AD1;
+/* Botão para excluir uma tarefa */
+.item-checklist .botao-excluir-tarefa {
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  margin-left: auto;
+  cursor: pointer;
+}
+
+/* Imagem da lixeira */
+.item-checklist .botao-excluir-tarefa img {
+  width: 24px;
+  height: 24px;
+}
+
+/* Efeito ao passar o mouse */
+.item-checklist .botao-excluir-tarefa:hover {
+  opacity: 0.7;
+}
+
+/* Efeito ao passar o mouse sobre a lixeira */
+.item-checklist .botao-excluir-tarefa:hover {
+  background-color: transparent;
+  opacity: 0.6;
 }
 
 .item-checklist span {
   color: #1D142B;
   font-size: 14px;
+}
+
+.item-checklist input {
+  accent-color: #820AD1;
 }
 
 /* Adicionar nova tarefa */

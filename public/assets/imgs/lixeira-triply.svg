@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" fill="none" aria-label="Lixeira roxa">
+  <g stroke="#820AD1" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M23 15V11C23 8.8 24.8 7 27 7H37C39.2 7 41 8.8 41 11V15"/>
+    <path d="M13 17H51"/>
+    <path d="M18 19L21 52C21.2 55 23.5 57 26.5 57H37.5C40.5 57 42.8 55 43 52L46 19"/>
+    <path d="M27 29V46M32 29V46M37 29V46" stroke-width="4"/>
+  </g>
+</svg>

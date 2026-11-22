@@ -719,12 +719,17 @@
                     //this.checked fala se o checkbox esta marcado (true) ou nao (false)
                     //${item.tarefa} mostra o texto da tarefa
                     lista_checklist.innerHTML += `
-                        <div class="item-checklist">
-                            <input type="checkbox" ${marcado}
-                                onchange="atualizarTarefa(${item.idChecklist}, this.checked)">
-                            <span>${item.tarefa}</span>
-                        </div>
-                    `;
+                    <div class="item-checklist">
+                        <input type="checkbox" ${marcado}
+                            onchange="atualizarTarefa(${item.idChecklist}, this.checked)">
+
+                        <span>${item.tarefa}</span>
+
+                        <button class="botao-excluir-tarefa">
+                            <img src="./assets/imgs/lixeira-triply.svg" alt="Excluir tarefa">
+                        </button>
+                    </div>
+                `;
                 }
 
                 // Calcula o progresso do checklist
