@@ -2467,3 +2467,44 @@ Seleciona os cards que estao nas posicoes pares*/
   color: #625A75;
   margin-bottom: 15px;
 }
+
+/* Submenu de viagens */
+
+/*ta acessando a classe dentro da classe menu*/
+.menu .menu-expansivel {
+  /*coloca um do lado do outro*/
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/*esconde o submenu*/
+.submenu-viagens {
+  display: none;
+  padding-left: 15px;
+  max-height: 300px;
+  /*fica maior a medida que o usuario vai cadawstrando viagens*/
+  overflow-y: auto;
+}
+
+.menu .submenu-viagens a {
+  display: block;
+  font-size: 14px;
+  padding: 10px 12px;
+  margin-bottom: 4px;
+  border-left: 2px solid #E5D5F5;
+  border-radius: 0 8px 8px 0;
+  color: #625A75;
+}
+
+.menu .submenu-viagens a:hover {
+  background-color: #F3E8FF;
+  color: #820AD1;
+}
+
+.menu .submenu-viagens .viagem-selecionada {
+  background-color: #F3E8FF;
+  color: #820AD1;
+  font-weight: bold;
+  border-left: 2px solid #820AD1;
+}

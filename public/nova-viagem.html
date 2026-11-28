@@ -9,6 +9,7 @@
     <title>Triply | Nova Viagem</title>
 
     <script src="./js/sessao.js"></script>
+    <script src="./js/menu-viagens.js" defer></script>
 
     <link rel="stylesheet" href="./css/estilo.css">
     <link rel="icon" type="image/png" href="assets/imgs/triply-icon.png">
@@ -28,8 +29,16 @@
                     <img src="./assets/imgs/logo.png" alt="Triply">
                 </a>
 
-                <a href="minhas-viagens.html">Minhas viagens</a>
-                <a href="dashboard.html">Dashboard</a>
+                <!-- Adiciona no menu esquerdo a lista de viagens pro usuario selecionar uma pra ver-->
+                <a href="#" class="menu-expansivel" onclick="alternarMenuViagens(); return false;">
+                    Minhas viagens
+                    <span id="seta_viagens">▾</span>
+                </a>
+                <div id="submenu_viagens" class="submenu-viagens">
+                    <a href="minhas-viagens.html">Visão geral</a>
+                    <div id="lista_menu_viagens"></div>
+                </div>
+
                 <a href="nova-viagem.html" class="ativo">Adicionar viagem</a>
 
             </div>
