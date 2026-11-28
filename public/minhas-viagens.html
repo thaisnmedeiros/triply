@@ -9,6 +9,7 @@
     <title>Triply | Minhas Viagens</title>
 
     <script src="./js/sessao.js"></script>
+    <script src="./js/menu-viagens.js" defer></script>
 
     <link rel="stylesheet" href="./css/estilo.css">
     <link rel="stylesheet" href="./css/login.css">
@@ -22,19 +23,19 @@
 <body class="minhas-viagens">
     <div class="pagina-viagens">
 
-        <!-- Menu lateral esquedo -->
-        <div class="menu-lateral">
-            <div class="menu">
-                <a href="minhas-viagens.html" class="logo">
-                    <img src="./assets/imgs/logo.png" alt="Triply">
-                </a>
+        <!-- Menu lateral esquedo e lista de viagens quando clica na setinha-->
+        <a href="#" class="menu-expansivel" onclick="alternarMenuViagens(); return false;">
+            Minhas viagens
+            <span id="seta_viagens">▾</span>
+        </a>
 
-                <!-- coloca "selecionado" a opção de minhas viagens (a pagina atual)-->
-                <a href="minhas-viagens.html" class="ativo">Minhas viagens</a>
-                <a href="nova-viagem.html">Adicionar viagem</a>
-            </div>
-            <a href="#" onclick="limparSessao(); return false;" class="sair-menu">Sair</a>
+        <div id="submenu_viagens" class="submenu-viagens">
 
+            <a href="minhas-viagens.html" class="viagem-selecionada">
+                Visão geral
+            </a>
+
+            <div id="lista_menu_viagens"></div>
         </div>
 
         <!-- Conteúdo da páginha -->
